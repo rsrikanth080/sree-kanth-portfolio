@@ -696,6 +696,7 @@
     featured.style.display = '';
 
     filtered.slice(1).forEach((ins,i) => grid.appendChild(buildCard(ins,i)));
+    attachModalClicks(filtered);
   }
 
   function buildSidebar() {
@@ -839,15 +840,8 @@
     if (e.key === 'ArrowLeft')   navigateModal(-1);
   });
 
-  // ── Wire up clicks — override render() to attach handlers
-  const _origRender = render;
-  function render() {
-    _origRender.call(this);
-    attachModalClicks();
-  }
-
-  function attachModalClicks() {
-    const filtered = getFiltered();
+  function attachModalClicks(filtered) {
+    if (!filtered) filtered = getFiltered();
 
     // Featured card
     const featured = document.getElementById('featured-card');
@@ -868,9 +862,6 @@
       };
     });
   }
-
-  // Re-attach after initial render
-  attachModalClicks();
 </script>
 </body>
 </html>
