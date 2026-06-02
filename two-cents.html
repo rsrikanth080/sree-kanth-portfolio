@@ -346,6 +346,124 @@
       #tc-grid { columns: 1; }
     }
     @media(max-width:560px) { .featured-card { padding: 22px 18px; } }
+
+    /* ── MODAL ── */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(15,10,5,0.55);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .22s ease;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: #fffdf9;
+      border-radius: 18px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08);
+      width: 100%; max-width: 620px;
+      max-height: 90vh;
+      display: flex; flex-direction: column;
+      transform: translateY(16px) scale(0.98);
+      transition: transform .22s ease;
+      overflow: hidden;
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .modal-counter {
+      font-size: 0.75rem; font-weight: 600; color: var(--text-dim);
+      letter-spacing: .04em;
+    }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: none; cursor: pointer; color: var(--text-muted);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, color .15s;
+    }
+    .modal-close:hover { background: var(--surface); color: var(--text); }
+
+    .modal-body {
+      padding: 32px 36px;
+      flex: 1; overflow-y: auto;
+    }
+    .modal-tag {
+      display: inline-block; margin-bottom: 20px;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 999px; letter-spacing: .05em;
+    }
+    .modal-text {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      line-height: 1.65; font-weight: 500;
+      color: var(--text); margin-bottom: 28px;
+    }
+    .modal-date {
+      font-size: 0.78rem; color: var(--text-dim);
+    }
+
+    .modal-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      gap: 12px;
+    }
+    .modal-nav {
+      display: flex; gap: 8px;
+    }
+    .modal-nav-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 9px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: none; cursor: pointer;
+      font-size: 0.82rem; font-weight: 500;
+      font-family: 'Inter', sans-serif; color: var(--text-muted);
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .modal-nav-btn:hover:not(:disabled) {
+      background: var(--surface); color: var(--text);
+      border-color: rgba(0,0,0,0.16);
+    }
+    .modal-nav-btn:disabled { opacity: 0.3; cursor: default; }
+    .modal-nav-btn.next {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+    }
+    .modal-nav-btn.next:hover:not(:disabled) { opacity: 0.88; }
+
+    .modal-copy-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 9px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: none; cursor: pointer;
+      font-size: 0.82rem; font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
+      transition: background .15s, color .15s;
+    }
+    .modal-copy-btn:hover { background: var(--accent-light); color: var(--accent); }
+    .modal-copy-btn.copied { color: #16a34a; }
+
+    .modal-kb-hint {
+      font-size: 0.68rem; color: var(--text-dim);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .kb-key {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: var(--surface);
+      font-size: 0.65rem; color: var(--text-muted);
+    }
+    @media(max-width:500px) {
+      .modal-body { padding: 24px 20px; }
+      .modal-kb-hint { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -449,6 +567,43 @@
   </div>
 
 </div><!-- /page-wrap -->
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="handleBackdropClick(event)">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <span class="modal-counter" id="modal-counter"></span>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <span class="modal-tag" id="modal-tag"></span>
+      <p class="modal-text" id="modal-text"></p>
+      <div class="modal-date" id="modal-date"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-nav">
+        <button class="modal-nav-btn prev" id="modal-prev" onclick="navigateModal(-1)">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Prev
+        </button>
+        <button class="modal-nav-btn next" id="modal-next" onclick="navigateModal(1)">
+          Next
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <button class="modal-copy-btn" id="modal-copy-btn" onclick="copyModal()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy
+      </button>
+      <div class="modal-kb-hint">
+        <span class="kb-key">←</span><span class="kb-key">→</span> navigate &nbsp;
+        <span class="kb-key" style="width:auto;padding:0 5px;">Esc</span> close
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   const TAG_CLASS = {
@@ -615,6 +770,107 @@
 
   buildSidebar();
   render();
+
+  // ── MODAL ──────────────────────────────────────────
+  let modalInsights = [];
+  let modalIndex = 0;
+
+  function openModal(list, index) {
+    modalInsights = list;
+    modalIndex = index;
+    renderModal();
+    document.getElementById('modal-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('modal-backdrop')) closeModal();
+  }
+
+  function navigateModal(dir) {
+    const next = modalIndex + dir;
+    if (next < 0 || next >= modalInsights.length) return;
+    modalIndex = next;
+    renderModal();
+  }
+
+  function renderModal() {
+    const ins = modalInsights[modalIndex];
+    document.getElementById('modal-text').textContent = ins.text;
+    document.getElementById('modal-date').textContent = fmt(ins.date);
+    document.getElementById('modal-counter').textContent = `${modalIndex + 1} of ${modalInsights.length}`;
+
+    const tagEl = document.getElementById('modal-tag');
+    tagEl.className = `modal-tag ${TAG_CLASS[ins.tag] || ''}`;
+    tagEl.textContent = ins.tag;
+
+    document.getElementById('modal-prev').disabled = modalIndex === 0;
+    document.getElementById('modal-next').disabled = modalIndex === modalInsights.length - 1;
+
+    // Reset copy btn
+    const copy = document.getElementById('modal-copy-btn');
+    copy.classList.remove('copied');
+    copy.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy`;
+  }
+
+  function copyModal() {
+    const text = modalInsights[modalIndex]?.text || '';
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('modal-copy-btn');
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy`;
+      }, 2000);
+    });
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('modal-backdrop').classList.contains('open')) return;
+    if (e.key === 'Escape')      closeModal();
+    if (e.key === 'ArrowRight')  navigateModal(1);
+    if (e.key === 'ArrowLeft')   navigateModal(-1);
+  });
+
+  // ── Wire up clicks — override render() to attach handlers
+  const _origRender = render;
+  function render() {
+    _origRender.call(this);
+    attachModalClicks();
+  }
+
+  function attachModalClicks() {
+    const filtered = getFiltered();
+
+    // Featured card
+    const featured = document.getElementById('featured-card');
+    if (featured && featured.style.display !== 'none') {
+      featured.style.cursor = 'pointer';
+      featured.onclick = (e) => {
+        if (e.target.closest('.tc-copy, .modal-copy-btn')) return;
+        openModal(filtered, 0);
+      };
+    }
+
+    // Grid cards
+    document.querySelectorAll('#tc-grid .tc-card').forEach((card, i) => {
+      card.style.cursor = 'pointer';
+      card.onclick = (e) => {
+        if (e.target.closest('.tc-copy')) return;
+        openModal(filtered, i + 1); // +1 because featured is index 0
+      };
+    });
+  }
+
+  // Re-attach after initial render
+  attachModalClicks();
 </script>
 </body>
 </html>
