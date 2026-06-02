@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vottery — Where Every Item Finds Its Winner | Sreekanth Reddy</title>
+  <meta name="description" content="Vottery reimagines secondhand selling as a coupon-based lottery. Sellers get guaranteed full price, buyers win exclusive goods at a fraction of the cost. OLX reimagined with excitement and certainty." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sree-kanth.netlify.app/vottery.html" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vottery",
+    "alternateName": "Vottery — Where Every Item Finds Its Winner",
+    "description": "A gamified secondary marketplace where sellers list unused items as coupon-based lotteries. Sellers receive guaranteed full price; buyers win exclusive goods at a fraction of the cost. Features UPI payments, live draw mechanics, and an Android + PWA interface.",
+    "applicationCategory": "ShoppingApplication",
+    "operatingSystem": "Android, Web (PWA)",
+    "url": "https://sree-kanth.netlify.app/vottery.html",
+    "featureList": [
+      "Coupon-based lottery marketplace",
+      "Guaranteed seller revenue",
+      "UPI payment integration",
+      "Live draw mechanics",
+      "Android and PWA support"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Sreekanth Reddy",
+      "url": "https://sree-kanth.netlify.app"
+    },
+    "dateCreated": "2025",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Sreekanth Reddy Portfolio",
+      "url": "https://sree-kanth.netlify.app"
+    }
+  }
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sree-kanth.netlify.app/vottery.html" />
+  <meta property="og:title" content="Vottery — Where Every Item Finds Its Winner" />
+  <meta property="og:description" content="Vottery reimagines secondhand selling as a coupon-based lottery. Sellers get guaranteed full price, buyers win exclusive goods at a fraction of the cost." />
+  <meta property="og:site_name" content="Sreekanth Reddy" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vottery — Where Every Item Finds Its Winner" />
+  <meta name="twitter:description" content="Vottery reimagines secondhand selling as a coupon-based lottery. Sellers get guaranteed full price, buyers win exclusive goods at a fraction of the cost." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/project-page.css" />
+  <style>
+    :root {
+      --hero-color: rgba(168,85,247,0.18);
+      --hero-accent: #a855f7;
+      --hero-grad: linear-gradient(135deg, #a855f7, #ec4899);
+    }
+    .feature-icon { background: rgba(168,85,247,0.12); }
+    .stat-val { color: #a855f7; }
+
+    .two-sided {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    }
+    @media(max-width:700px){ .two-sided { grid-template-columns: 1fr; } }
+
+    .persona-card {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: var(--radius); padding: 28px; position: relative; overflow: hidden;
+    }
+    .persona-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .persona-seller::before { background: #a855f7; }
+    .persona-buyer::before { background: #ec4899; }
+    .persona-label { font-size: 0.7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px; }
+    .persona-seller .persona-label { color: #a855f7; }
+    .persona-buyer .persona-label { color: #ec4899; }
+    .persona-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .persona-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
+    .persona-card .gain {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 600;
+    }
+    .persona-seller .gain { background: rgba(168,85,247,0.12); color: #c084fc; }
+    .persona-buyer .gain { background: rgba(236,72,153,0.12); color: #f472b6; }
+
+    .example-card {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .example-card .item-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .example-card .item-desc { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 16px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .full-price { font-size: 1.4rem; font-weight: 800; color: #a855f7; font-family: 'Space Grotesk', sans-serif; }
+    .coupon-price-label { font-size: 0.75rem; color: var(--text-dim); }
+    .coupon-price-val { font-size: 1.1rem; font-weight: 700; text-align: right; }
+    .progress-bar-wrap { margin-bottom: 8px; }
+    .progress-bar-bg { background: rgba(255,255,255,0.08); border-radius: 999px; height: 6px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #ec4899); border-radius: 999px; }
+    .progress-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 6px; }
+    .buy-btn {
+      display: block; width: 100%; padding: 12px;
+      background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff;
+      border-radius: 10px; font-weight: 700; font-size: 0.9rem; text-align: center;
+      margin-top: 16px; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="project-nav">
+  <a href="./index.html" class="nav-back">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-brand">Vottery</span>
+  <a href="https://drive.google.com/file/d/1kdOaMiSwu0PluYfFmVT5myDcgPw43dW1/view?usp=sharing" target="_blank" rel="noopener" class="nav-cta-btn" style="background:#a855f7;">Watch Demo</a>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag"><span class="dot"></span>Android App · Personal Project · 2025</div>
+  <h1>Where Every Item<br><span class="grad">Finds Its Winner</span></h1>
+  <p class="hero-sub">
+    Sellers walk away with guaranteed full revenue. Buyers win exclusive items at a fraction of the price. Vottery turns unused goods into coupon-based lotteries — fair for everyone, exciting for all.
+  </p>
+  <div class="hero-btns">
+    <a href="https://drive.google.com/file/d/1kdOaMiSwu0PluYfFmVT5myDcgPw43dW1/view?usp=sharing" target="_blank" rel="noopener" class="btn-primary" style="background: linear-gradient(135deg,#a855f7,#ec4899);">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Watch Demo
+    </a>
+    <a href="./index.html#side-projects" class="btn-outline">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      More Projects
+    </a>
+  </div>
+
+  <div class="phone-row">
+    <div class="phone-frame">
+      <img src="./assets/vottery-splash.jpg" alt="Vottery splash screen" />
+    </div>
+    <div class="phone-frame">
+      <img src="./assets/vottery-feed.jpg" alt="Vottery feed — active listings" />
+    </div>
+    <div class="phone-frame">
+      <img src="./assets/vottery-product.jpg" alt="Vottery product details — Rolex Submariner" />
+    </div>
+    <div class="phone-frame">
+      <img src="./assets/vottery-coupons.jpg" alt="Vottery My Coupons screen" />
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div>
+      <div class="problem-label">The Problem</div>
+      <h2>Selling second-hand is broken</h2>
+      <p>You have an unused Rolex, a pair of concert tickets you can't use, or last year's iPhone. OLX and Facebook Marketplace are full of time-wasters who negotiate hard and disappear at the last minute.</p>
+      <p>Meanwhile, the people who'd genuinely love your item simply can't afford the full asking price. Both sides lose.</p>
+    </div>
+    <ul class="pain-list">
+      <li><span class="icon">👻</span>Buyers ghost after days of negotiation — no guarantee of sale</li>
+      <li><span class="icon">💸</span>Exclusive items stay out of reach for buyers on a budget</li>
+      <li><span class="icon">📉</span>Sellers discount heavily just to close — leaving money on the table</li>
+      <li><span class="icon">🔒</span>No trust layer between strangers in a P2P transaction</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TWO SIDES -->
+<section class="section">
+  <div class="section-tag">Win-Win Design</div>
+  <h2>Built for both<br><span class="grad">sellers and buyers</span></h2>
+  <p class="section-desc">Vottery eliminates the zero-sum dynamic of traditional resale. Everyone wins something — sellers get certainty, buyers get a shot at something great.</p>
+
+  <div class="two-sided">
+    <div class="persona-card persona-seller">
+      <div class="persona-label">For Sellers</div>
+      <h3>Guaranteed revenue. Zero negotiation.</h3>
+      <p>List your item, set the number of coupons, and watch them sell. Once the target is hit, a winner is drawn and you pocket the full price — no flaking, no haggling, no discount pressure.</p>
+      <span class="gain">✓ Full price, guaranteed</span>
+    </div>
+    <div class="persona-card persona-buyer">
+      <div class="persona-label">For Buyers</div>
+      <h3>Win big. Spend very little.</h3>
+      <p>Buy one or more coupons at a micro price for a real chance to win something worth 100x more. The Rolex draw, the concert tickets, the limited edition sneakers — all within reach.</p>
+      <span class="gain">✓ Fraction of the price</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">Features</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:48px;">Everything a marketplace <span style="background:linear-gradient(135deg,#a855f7,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">needs to be exciting</span></h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3>List in Minutes</h3>
+        <p>Upload photos, add a description, set your full price and coupon count. The system auto-calculates coupon price. Submit for review — go live within hours.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Live Progress Tracking</h3>
+        <p>Real-time sell-through progress bars create natural FOMO. Buyers see exactly how many coupons remain — driving urgency without any dark patterns.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎲</div>
+        <h3>Transparent Draw</h3>
+        <p>Once all coupons sell, a verifiably random winner is selected automatically. Every coupon holder has an equal shot — no manipulation, no hidden weighting.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>UPI-Native Payments</h3>
+        <p>Built for India — QR-based UPI flow with manual verification for the beta. Razorpay integration ready for production scale.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎫</div>
+        <h3>My Coupons</h3>
+        <p>Track every entry with unique coupon codes, purchase dates, and live draw status. One tab for all your active bets.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Admin Trust Layer</h3>
+        <p>Every listing and payment is manually verified in the MVP. A full admin dashboard with metrics, listings management, and payment verification builds trust before automating.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-tag">How It Works</div>
+  <h2>Simple for buyers.<br><span class="grad">Rewarding for sellers.</span></h2>
+  <p class="section-desc" style="margin-bottom: 40px;">Two parallel flows, one clean experience.</p>
+  <div class="steps-row" style="border: 1px solid var(--card-border); border-radius: var(--radius);">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Seller lists the item</h3>
+      <p>Uploads photos, sets full price (e.g. ₹8,50,000) and coupon count (e.g. 200). Coupon price is auto-calculated at ₹4,250 each.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Buyers purchase coupons</h3>
+      <p>Anyone can buy 1–10 coupons via UPI. Each coupon is a unique entry code. Progress bars drive excitement as the draw fills up.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Winner is drawn</h3>
+      <p>Once all coupons sell, a random winner is selected. Seller receives guaranteed full revenue. Winner claims the item.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top: 40px;">
+    <strong>Why I built this:</strong> I came across a news story about a man in a tier-2 town who needed to sell his land urgently for ₹15 lakhs but couldn't find a buyer. His solution was remarkable — he created 3,000 coupons at ₹500 each, ran a lottery, and walked away with exactly ₹15 lakhs. The buyer who won paid ₹500 for land worth ₹15 lakhs. Both sides won. That story stuck with me. I wanted to build an app that made this model accessible for everyday items — turning unsellable goods into fair, exciting draws where sellers get certainty and buyers get a real shot at something they couldn't otherwise afford.
+  </div>
+</section>
+
+<!-- DESIGN CHALLENGES -->
+<div class="problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">Design Challenges</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px;">What's hard to get right</h2>
+    <p style="color:var(--text-muted); font-size:1rem; max-width:600px; margin-bottom:48px; line-height:1.7;">Vottery's core mechanic is exciting but creates a real tension: someone who buys into 3 draws and wins nothing has lost real money and has every reason to leave. These are the design problems I'd prioritize solving.</p>
+
+    <div class="features-grid">
+      <div class="feature-card" style="border-left: 3px solid #a855f7;">
+        <div class="feature-icon" style="background:rgba(168,85,247,0.12);">⚠️</div>
+        <h3>The Repeat Loser Problem</h3>
+        <p>A buyer who enters 3–4 draws without winning has spent meaningful money and has nothing to show for it. Unlike gambling where the feedback loop is immediate, Vottery draws can take days or weeks to close — making losses feel worse, not better.</p>
+        <p style="font-size:0.82rem; color:#c084fc; margin-top:12px; font-weight:600;">→ The core retention risk for the platform</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(168,85,247,0.12);">🎯</div>
+        <h3>Loyalty Credit System</h3>
+        <p>Every coupon purchase earns loyalty points regardless of outcome. After accumulating enough points (e.g. ₹2,000 spent), the buyer unlocks a free coupon entry or a guaranteed slot in a low-value draw — something tangible for staying engaged.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: reward spend, not just wins</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(168,85,247,0.12);">📊</div>
+        <h3>Near-Miss Transparency</h3>
+        <p>After every draw, losers see their rank: "You held coupon #47. Winner was #183. You were in the top 25%." Turning a loss into a statistic keeps users engaged and builds the perception of fairness — you were close, not just unlucky.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: make losing feel informative</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(168,85,247,0.12);">🛡️</div>
+        <h3>Loss Streak Protection</h3>
+        <p>After 3 consecutive draws without winning, a user's next coupon purchase gets 2× lottery weight — doubling their odds without changing the payout structure for the seller. Resets on win. Gives high-engagement users a reason to keep going.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: reward persistence, not just luck</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(168,85,247,0.12);">💸</div>
+        <h3>Spend Threshold Cashback</h3>
+        <p>If a buyer spends more than ₹X on the platform in a 90-day window without a single win, a 10–15% cashback credit is applied to their wallet. Caps the downside for high-frequency users and signals that the platform has their back.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: cap the pain of bad luck streaks</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(168,85,247,0.12);">🧩</div>
+        <h3>What I'd Validate First</h3>
+        <p>Before building any mitigation, I'd instrument the drop-off: do users churn after loss #1 or loss #3? If it's after #1, the problem is expectation-setting, not loyalty mechanics. The fix might just be better onboarding copy, not a loyalty engine.</p>
+        <p style="font-size:0.82rem; color:#c084fc; margin-top:12px; font-weight:600;">→ Measure before building</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO CTA -->
+<section class="demo-section">
+  <div class="section-tag" style="display:inline-block; margin-bottom:20px;">See It Live</div>
+  <h2>Watch Vottery in action</h2>
+  <p>Full demo of the seller listing flow, buyer purchase experience, coupon tracking, and draw mechanics.</p>
+  <a href="https://drive.google.com/file/d/1kdOaMiSwu0PluYfFmVT5myDcgPw43dW1/view?usp=sharing" target="_blank" rel="noopener" class="btn-primary" style="background: linear-gradient(135deg,#a855f7,#ec4899);">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Watch Demo Video
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="project-footer">
+  <p>Vottery · Personal Project · Sreekanth Reddy · 2025</p>
+  <a href="./index.html" class="footer-back">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>

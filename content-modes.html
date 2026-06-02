@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Modes — AI-Powered Email Content Design | Sreekanth Reddy</title>
+  <meta name="description" content="Content Modes is an AI-powered content design tool that enables enterprise marketers to build, test, and deploy adaptive email experiences at scale — delivering billions of customer engagements." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sree-kanth.netlify.app/content-modes.html" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Content Modes",
+    "alternateName": "Content Modes — Adaptive Content for Every Reader",
+    "description": "A drop-in LLM-powered widget that transforms any marketing page into 4 adaptive reading modes: Verbose (full detail), Quick Read (bullet points), Visual (key visuals and callouts), and Audio (text-to-speech). Built for enterprise marketers to serve diverse reader preferences without maintaining multiple versions of content.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://sree-kanth.netlify.app/content-modes.html",
+    "featureList": [
+      "4 adaptive reading modes (Verbose, Quick Read, Visual, Audio)",
+      "LLM-powered content transformation",
+      "Drop-in JavaScript widget",
+      "Reader preference memory",
+      "Zero content duplication",
+      "Enterprise marketer focused"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Sreekanth Reddy",
+      "url": "https://sree-kanth.netlify.app"
+    },
+    "dateCreated": "2025",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Sreekanth Reddy Portfolio",
+      "url": "https://sree-kanth.netlify.app"
+    }
+  }
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sree-kanth.netlify.app/content-modes.html" />
+  <meta property="og:title" content="Content Modes — AI-Powered Email Content Design" />
+  <meta property="og:description" content="Content Modes enables enterprise marketers to build, test, and deploy adaptive email experiences at scale — delivering billions of customer engagements." />
+  <meta property="og:site_name" content="Sreekanth Reddy" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Content Modes — AI-Powered Email Content Design" />
+  <meta name="twitter:description" content="Content Modes enables enterprise marketers to build, test, and deploy adaptive email experiences at scale — delivering billions of customer engagements." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/project-page.css" />
+  <style>
+    :root {
+      --hero-color: rgba(236,72,153,0.15);
+      --hero-accent: #ec4899;
+      --hero-grad: linear-gradient(135deg, #6366f1, #ec4899);
+    }
+    .feature-icon { background: rgba(236,72,153,0.1); }
+    .stat-val { color: #ec4899; }
+
+    /* Live demo strip */
+    .demo-strip {
+      max-width: 860px; margin: 60px auto 0;
+      border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden;
+    }
+    .demo-strip-header {
+      background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--card-border);
+      padding: 12px 20px; display: flex; align-items: center; gap: 20px;
+    }
+    .mode-tab {
+      padding: 6px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; border: 1px solid transparent; transition: all .2s;
+      color: var(--text-muted);
+    }
+    .mode-tab.active { background: var(--card); border-color: var(--card-border); color: var(--text); }
+    .demo-content { padding: 32px; }
+    .demo-content p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* Screenshot grid */
+    .screenshot-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+    }
+    @media(max-width:700px){ .screenshot-grid { grid-template-columns: 1fr; } }
+    .screenshot-item { display: flex; flex-direction: column; gap: 12px; }
+    .screenshot-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--mode-c, #6366f1);
+    }
+    .screenshot-frame {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+      background: #0a0a0a;
+    }
+    .screenshot-frame img { width: 100%; display: block; }
+    .screenshot-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+    .screenshot-placeholder {
+      background: var(--ph-grad); min-height: 220px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ph-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 32px; }
+    .ph-icon { font-size: 2rem; }
+    .ph-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
+    .ph-sub { font-size: 0.8rem; color: var(--text-dim); }
+
+    /* Stat comparison */
+    .comparison-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;
+    }
+    @media(max-width:600px){ .comparison-grid { grid-template-columns: 1fr; } }
+    .comparison-card {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .comparison-label { font-size: 0.72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+    .comparison-bad .comparison-label { color: var(--text-dim); }
+    .comparison-good .comparison-label { color: #ec4899; }
+    .comparison-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .comparison-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+    .comparison-bad { opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="project-nav">
+  <a href="./index.html" class="nav-back">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-brand">Content Modes</span>
+  <a href="https://drive.google.com/file/d/1OL8A4A2tgeg7-uXPWq1gNDMYxE0M1AFZ/view?usp=drive_link" target="_blank" rel="noopener" class="nav-cta-btn" style="background:linear-gradient(135deg,#6366f1,#ec4899);">Watch Demo</a>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag"><span class="dot"></span>Web Prototype · Concept · 2025</div>
+  <h1>Your Content.<br><span class="grad">Their Way.</span></h1>
+  <p class="hero-sub">
+    AI made content creation instant. But every visitor still reads the same static page. Content Modes is a drop-in widget that transforms any marketing page into an adaptive experience — matching how each person actually wants to consume information.
+  </p>
+  <div class="hero-btns">
+    <a href="https://drive.google.com/file/d/1OL8A4A2tgeg7-uXPWq1gNDMYxE0M1AFZ/view?usp=drive_link" target="_blank" rel="noopener" class="btn-primary" style="background:linear-gradient(135deg,#6366f1,#ec4899);">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Watch Demo
+    </a>
+    <a href="./index.html#side-projects" class="btn-outline">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      More Projects
+    </a>
+  </div>
+
+  <!-- Mode selector mockup -->
+  <div class="demo-strip">
+    <div class="demo-strip-header">
+      <span style="font-size:0.75rem; color:var(--text-dim); margin-right:4px;">Reading mode:</span>
+      <span class="mode-tab active">📄 Verbose</span>
+      <span class="mode-tab">⚡ Quick Read</span>
+      <span class="mode-tab">🎨 Visual</span>
+      <span class="mode-tab">🎧 Audio</span>
+    </div>
+    <div class="demo-content">
+      <p>Adobe Brand Concierge is an enterprise-grade agentic AI platform that enables organizations to deploy multiple specialized AI agents capable of orchestrating intelligent, on-brand conversations at scale. By combining advanced natural language understanding with your brand's unique voice and knowledge base, Brand Concierge delivers personalized, contextually aware interactions across every touchpoint in the customer journey — from initial awareness through post-purchase support and loyalty.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div>
+      <div class="problem-label">The Insight</div>
+      <h2>AI unlocked content creation. Nobody solved consumption.</h2>
+      <p>Marketers now use AI to generate landing pages, product descriptions, and campaigns at unprecedented speed. But how that content reaches readers hasn't changed at all.</p>
+      <p>Every visitor gets the same wall of text — whether they're a 60-second skimmer, a deep researcher, an audio learner, or someone who thinks visually. The content doesn't adapt. The reader has to.</p>
+    </div>
+    <ul class="pain-list">
+      <li><span class="icon">📊</span>Avg. reading time on marketing pages: under 15 seconds</li>
+      <li><span class="icon">👂</span>Podcast and audio content growing 30%+ YoY — people prefer listening</li>
+      <li><span class="icon">📉</span>Long-form pages convert well for some buyers, terribly for others</li>
+      <li><span class="icon">🔁</span>Same content, same format — regardless of who's reading or how</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4 MODES -->
+<section class="section">
+  <div class="section-tag">The Solution</div>
+  <h2>Four ways to read<br><span class="grad">one piece of content</span></h2>
+  <p class="section-desc">A visitor clicks a mode toggle. The entire page re-renders to match. No reload. No new URL. The same content — instantly transformed by LLM into the format they prefer.</p>
+
+  <div class="modes-grid">
+    <div class="mode-card" style="--mode-color: #6366f1;">
+      <div class="mode-label">📄 Verbose Mode</div>
+      <h3>Full narrative. For deep readers.</h3>
+      <p>The original, fully-detailed content — every context point, every nuance, every supporting argument. For visitors who want to understand everything before making a decision.</p>
+      <div class="mode-example">"Adobe Brand Concierge is an enterprise-grade agentic AI platform that enables organizations to deploy multiple specialized AI agents capable of orchestrating intelligent, on-brand conversations…"</div>
+    </div>
+    <div class="mode-card" style="--mode-color: #f97316;">
+      <div class="mode-label">⚡ Quick Read Mode</div>
+      <h3>Key points. Crisp sentences.</h3>
+      <p>LLM-condensed version — distilled to the essential facts in scannable bullets or short punchy sentences. For the visitor who has 30 seconds and wants the signal, not the noise.</p>
+      <div class="mode-example">"AI platform for enterprise brands. Deploys multiple agents. On-brand conversations at scale. Fortune 500 ready. $10M ARR in 6 months."</div>
+    </div>
+    <div class="mode-card" style="--mode-color: #22d3ee;">
+      <div class="mode-label">🎨 Visual Mode</div>
+      <h3>Icons, diagrams, spatial layout.</h3>
+      <p>Content restructured for visual thinkers — key concepts as labeled callouts, stats as visual elements, and flow presented spatially rather than linearly.</p>
+      <div class="mode-example">[ 🤖 Multi-agent ] → [ 🏢 Enterprise scale ] → [ 💬 On-brand conversations ] → [ 📈 $10M ARR ]</div>
+    </div>
+    <div class="mode-card" style="--mode-color: #ec4899;">
+      <div class="mode-label">🎧 Audio Mode</div>
+      <h3>Narrated. For the on-the-go visitor.</h3>
+      <p>Content converted to a naturally spoken script and narrated via TTS. Commuters, multitaskers, and audio learners can consume a full product page without reading a word.</p>
+      <div class="mode-example">"Hey, let me walk you through Brand Concierge. It's Adobe's enterprise AI platform — think of it as a team of AI agents that speak your brand's language…"</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">Implementation</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px;">Drop-in. <span style="background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Works on any page.</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; max-width:580px; margin-bottom:48px; line-height:1.7;">No redesign needed. The widget wraps existing content, sends it to the LLM on mode switch, and replaces the DOM — all client-side.</p>
+    <div class="steps-row" style="border: 1px solid var(--card-border); border-radius: var(--radius);">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Embed the widget</h3>
+        <p>One script tag. The widget identifies content blocks on your page automatically using semantic HTML selectors.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Visitor picks a mode</h3>
+        <p>A minimal floating toolbar lets visitors choose their preferred format. First visit defaults to Verbose. Returning visitors get their last mode instantly.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>LLM transforms the content</h3>
+        <p>The selected mode triggers an LLM call with the page content. The response replaces the existing DOM. Transformations are cached per session.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Preference is remembered</h3>
+        <p>Mode preference is stored and synced to the user's profile (via CDP/identity resolution). Future visits — across your entire site — default to their mode.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BIGGER VISION -->
+<section class="section">
+  <div class="section-tag">The Bigger Vision</div>
+  <h2>Content personalization at<br><span class="grad">the presentation layer</span></h2>
+  <p class="section-desc">Today, personalization means showing different content to different people. Content Modes goes one level deeper — same content, adapted to how each person processes information.</p>
+
+  <div class="comparison-grid">
+    <div class="comparison-card comparison-bad">
+      <div class="comparison-label">Today</div>
+      <h3>Personalize what people see</h3>
+      <p>Segment users. Show different headlines, offers, or pages based on firmographics and behavior. The format stays the same — a static webpage.</p>
+    </div>
+    <div class="comparison-card comparison-good">
+      <div class="comparison-label">With Content Modes</div>
+      <h3>Personalize how people experience it</h3>
+      <p>Same content — but delivered as a deep read, a 10-second scan, a visual diagram, or a 2-minute audio brief. Meet every cognitive style, not just every segment.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:40px;">
+    <strong>Why this matters for Adobe:</strong> This concept sits directly at the intersection of Marketo's personalization engine, Dynamic Chat's conversational layer, and Adobe's GenAI content tools. It's a natural extension of the stack — AI doesn't just write the content, it reshapes it per visitor in real time.
+  </div>
+</section>
+
+<!-- SCREENSHOTS IN ACTION -->
+<div class="problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">Demo Screenshots</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px;">Same page. <span style="background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Four experiences.</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; max-width:600px; margin-bottom:48px; line-height:1.7;">One marketing page — instantly transformed by LLM into four distinct reading experiences. The widget sits on top; the content underneath adapts on demand.</p>
+    <div class="screenshot-grid">
+      <div class="screenshot-item">
+        <div class="screenshot-label" style="--mode-c:#6366f1;">📄 Verbose</div>
+        <div class="screenshot-frame">
+          <img src="./assets/content-modes-verbose.png" alt="Verbose mode — full narrative with metrics table" />
+        </div>
+        <p class="screenshot-desc">Full context, every detail. For buyers who need to understand everything before deciding.</p>
+      </div>
+      <div class="screenshot-item">
+        <div class="screenshot-label" style="--mode-c:#f97316;">⚡ Quick Read</div>
+        <div class="screenshot-frame">
+          <img src="./assets/content-modes-quick.png" alt="Quick read mode — bullet points" />
+        </div>
+        <p class="screenshot-desc">Key points, crisp bullets. For the 30-second skimmer who wants signal, not noise.</p>
+      </div>
+      <div class="screenshot-item">
+        <div class="screenshot-label" style="--mode-c:#22d3ee;">🎨 Visual</div>
+        <div class="screenshot-frame">
+          <img src="./assets/content-modes-visual.png" alt="Visual mode — icon cards with stats" />
+        </div>
+        <p class="screenshot-desc">Icons, stats, spatial layout. For visual thinkers who process information as images, not text.</p>
+      </div>
+      <div class="screenshot-item">
+        <div class="screenshot-label" style="--mode-c:#ec4899;">🎧 Audio</div>
+        <div class="screenshot-frame">
+          <img src="./assets/content-modes-audio.png" alt="Audio mode — narrated player" />
+        </div>
+        <p class="screenshot-desc">Narrated and ready to play. For commuters and multitaskers who listen while they move.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESIGN CHALLENGES -->
+<div class="problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">Design Challenges</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px;">What's hard to get right</h2>
+    <p style="color:var(--text-muted); font-size:1rem; max-width:600px; margin-bottom:48px; line-height:1.7;">Transforming content on the fly with LLMs sounds elegant until you hit the real edge cases. These are the problems that matter most before this moves beyond prototype.</p>
+
+    <div class="features-grid">
+      <div class="feature-card" style="border-left: 3px solid #ec4899;">
+        <div class="feature-icon">⚠️</div>
+        <h3>LLM Transformation Quality</h3>
+        <p>The LLM condenses or restructures content without knowing what's critical to the brand. Quick Read might strip a key differentiator. Visual mode might misrepresent a statistic. Hallucinations — even minor ones — in a marketing context erode trust fast and create legal exposure.</p>
+        <p style="font-size:0.82rem; color:#f472b6; margin-top:12px; font-weight:600;">→ The highest-risk failure mode for the product</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>SEO Implications of DOM Replacement</h3>
+        <p>If the page DOM is replaced with LLM-generated content on mode switch, what does Google index? Client-side transformations are invisible to crawlers. Server-side rendering or careful caching strategies would be needed to avoid tanking organic rankings for pages that adopt Content Modes.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: SSR transformations cached per mode, canonical URL per original</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>TTS Brand Voice Drift</h3>
+        <p>Generic text-to-speech voices mispronounce brand names, technical terms, and product names. "Adobe Experience Manager" becomes a phonetic approximation. For enterprise brands, a robotic or incorrect narration is worse than no audio at all — it signals low quality at the moment of highest intent.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: brand-specific pronunciation dictionaries, ElevenLabs or custom voice</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>Latency on First Mode Switch</h3>
+        <p>The first time a visitor clicks Quick Read, they wait for an LLM round-trip. On a slow connection, that's 2–4 seconds of blank content — exactly when curiosity is highest. If the wait feels longer than just reading the original, users won't switch modes again.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: pre-generate all modes on page load in background, show skeleton UI</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏢</div>
+        <h3>Regulated Industry Risk</h3>
+        <p>For finserv, healthcare, or legal marketing pages, every word is reviewed by compliance. An LLM rewriting that content — even to simplify it — creates a version that was never approved. Content Modes would need a human-in-the-loop review step or be excluded from regulated content entirely.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:12px; font-weight:600;">Mitigation: compliance flag per page, human-approved mode variants for regulated content</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3>What I'd Validate First</h3>
+        <p>Before building the full widget, I'd A/B test a single page with manual Quick Read and Verbose variants — no LLM, just two static versions. If the mode with fewer words converts better for some segments, the concept is validated. Then the LLM is just the scale mechanism, not the hypothesis.</p>
+        <p style="font-size:0.82rem; color:#f472b6; margin-top:12px; font-weight:600;">→ Prove the format hypothesis before automating it</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO CTA -->
+<section class="demo-section">
+  <div class="section-tag" style="display:inline-block; margin-bottom:20px;">See It Live</div>
+  <h2>Watch Content Modes in action</h2>
+  <p>A live demo showing all four modes transforming a real marketing page in real time.</p>
+  <a href="https://drive.google.com/file/d/1OL8A4A2tgeg7-uXPWq1gNDMYxE0M1AFZ/view?usp=drive_link" target="_blank" rel="noopener" class="btn-primary" style="background:linear-gradient(135deg,#6366f1,#ec4899);">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Watch Demo Video
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="project-footer">
+  <p>Content Modes · Concept & Prototype · Sreekanth Reddy · 2025</p>
+  <a href="./index.html" class="footer-back">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>

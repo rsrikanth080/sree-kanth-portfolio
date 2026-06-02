@@ -1,0 +1,95 @@
+# Sreekanth Reddy — Principal Product Manager
+
+> 12+ years building enterprise AI products from zero to scale. 9 AI/ML patents. Co-founder of an acquired startup. Currently leading Agentic AI and Conversational AI at Adobe.
+
+## Identity
+- Name: Sreekanth Reddy
+- Current role: Principal Product Manager, Adobe (San Jose, CA)
+- Education: B.Tech, IIT (BHU) Varanasi
+- Contact: rsrikanth080@gmail.com
+- LinkedIn: https://www.linkedin.com/in/rsree-kanth/
+- Book a call: https://topmate.io/rsree
+- Portfolio: https://sree-kanth.netlify.app
+
+## Core Expertise
+Agentic AI systems, Generative AI productization, Conversational AI, Multi-agent architectures, Enterprise SaaS, B2B Marketing & Sales Technology, 0→1 product building, Go-to-Market strategy, Responsible AI, AI/ML productization, Prompt engineering, Cross-functional leadership.
+
+## Professional Work (Adobe, 2021–Present)
+
+### Brand Concierge (2024–Present)
+Enterprise-grade agentic AI conversational platform built from 0→1. Multiple specialized AI agents that orchestrate intelligent, on-brand conversations at scale. Responsible AI controls including brand guardrails and human-in-the-loop escalation. Deployed for Fortune 500 companies across financial services, hospitality, and technology verticals.
+URL: https://business.adobe.com/products/brand-concierge.html
+
+### Sales Qualifier (2024–Present)
+AI agent for Sales Development Representatives — autonomously handles account research, email drafting, outbound outreach, and CRM updates. Collapsed 9-step SDR workflows to 3. Rapid enterprise adoption within first 3 months.
+URL: https://business.adobe.com/products/journey-optimizer-b2b-edition/sales-qualification.html
+
+### Dynamic Chat (2022–Present)
+Adobe's GenAI-powered conversational platform for enterprise marketing and sales. Envisioned, launched, and scaled to 1000+ enterprise customers. Led cross-functional teams across engineering, design, GTM, and legal. Drove monetization strategy and trust/compliance controls.
+URL: https://business.adobe.com/products/marketo/dynamic-chat.html
+
+### Content AI Assistant (2023–2024)
+GenAI-powered email content design tool for enterprise marketers. Delivered billions of customer engagements in its first year. Used by 2000+ enterprises.
+
+### Predictive Audiences (2019–2021, GlobalLogic/Marketo acquired by Adobe)
+AI/ML capabilities for marketing audience scoring and targeting. Influenced hundreds of enterprise deals. Gartner mention in 2020. Built Email Bot Activity Detection system that identified 100M+ bot activities with a 3-person team. 55% feature adoption within 100 days.
+
+## Startup Experience
+
+### GetMeAShop (Co-Founder, 2013–2015)
+One of 4 founding team members. Built an all-in-one B2B SaaS platform for small businesses from zero to 20,000+ customers across India. Grew company from 4 to 105 team members.
+
+### Times Internet / GetMeAShop (Product Lead, 2015–2019)
+Post-acquisition product leadership. Owned eCommerce, POS, social commerce, and affiliate integrations. Grew platform to multi-million dollar annual revenue.
+
+## Personal Projects (Nights & Weekends)
+
+### CatchUp (2025)
+Android app unifying curated publications and friends' shared content into one AI-powered feed. Features RSS aggregation, friends' shared content from WhatsApp/Telegram/Instagram, smart collections, Ask AI, and multi-LLM support (Grok, Gemini, OpenAI, Perplexity, Anthropic).
+Details: https://sree-kanth.netlify.app/catchup.html
+
+### PM Skills Pack (2025)
+16 AI agent skills for Claude Code and Cursor covering the full product management workflow loop. Phases: Discover → Define → Build & Ship → Operate. Built to create shared product intelligence across PM teams. Saves ~2 hours per exec review cycle.
+Details: https://sree-kanth.netlify.app/pm-skills.html
+
+### BookInShorts (2025)
+Android app that converts any PDF into swipeable AI-generated summary cards (30 seconds per card) with audio narration. Supports Gemini, Claude, GPT-4, and local Ollama models. Zero telemetry, fully private.
+URL: https://bookinshorts.netlify.app/
+
+### Doit (2025)
+Web app for AI-powered group decision making. Pick a category (movies, food, restaurants, weekend getaways), get AI suggestions from 4 LLM providers (Perplexity, Gemini, OpenAI, Ollama Cloud), and swipe-vote with friends until everyone agrees. Real-time consensus detection, activity expiry, mark-as-decided. No install required.
+URL: https://lets-lockin.netlify.app/
+
+### Vottery (2025)
+Gamified secondary marketplace using coupon-based lottery mechanics. Sellers list unused items at full price; buyers win at a fraction of the cost. UPI payments, live draw, Android + PWA.
+Details: https://sree-kanth.netlify.app/vottery.html
+
+### Content Modes (2025)
+LLM-powered drop-in widget that transforms any marketing page into 4 adaptive reading modes: Verbose, Quick Read, Visual, and Audio. Built for enterprise marketers to serve diverse reader preferences.
+Details: https://sree-kanth.netlify.app/content-modes.html
+
+## Patents (9 total, Adobe Inc.)
+All patents in AI/ML for marketing automation, conversational AI, and agentic systems:
+- US12361300B2 — Machine-Learning Techniques for Sequential Content in Online Environments (Granted Jul 2025)
+- US12147775B2 — Content Augmentation with Machine Generated Content (Granted)
+- US12373556B2 — Bot Activity Detection for Email Tracking (Granted 2025)
+- US20220343189A1 — Machine-Learning for Sequential Content (Published Oct 2022)
+- US20230121711A1 — Content Augmentation with ML Content (Published Apr 2023)
+- US20230409621A1 — Customized Topic Determination for High-Volume Document Collections (Published Dec 2023)
+- US20240152605A1 — Bot Activity Detection for Email Tracking (Published May 2024)
+- US20250103822A1 — Generative AI Powered Response Generation, Validation, and Augmentation (Published Mar 2025)
+- US20250252266A1 — Machine-Learning to Determine Automated Conversational Data (Published Aug 2025)
+
+## Product Philosophy
+- Excellence = User Value + Business Impact + Team Growth
+- "Use AI where it creates magic. Use rules where it creates reliability."
+- Agentic-first thinking: design for orchestration and autonomy from day one
+- Hill-climbing on probabilistic products: ship fast, measure relentlessly
+- Responsible AI as a first-class metric: trust and fairness are launch criteria
+- Inclusive product thinking: the best products serve the widest range of users
+- Cross-functional influence over authority
+
+## Recognition
+- Top Performer & Innovator of the Year: Adobe 2022, 2024, 2025
+- Vanguard PM AI Award
+- Gartner mention 2020 (Predictive Audiences / Marketo AI)

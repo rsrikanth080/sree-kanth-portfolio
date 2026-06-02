@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM Skills Pack — 16 AI Agent Skills for Product Managers | Sreekanth Reddy</title>
+  <meta name="description" content="16 agent skills for Claude Code and Cursor covering the full PM loop — discovery, PRDs, competitive analysis, engineering handoffs. Built to make every PM on the team start from the same product intelligence." />
+  <meta name="keywords" content="product manager AI tools, Claude Code skills, Cursor AI, PM workflow, PRD template, AI agent, product management automation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sree-kanth.netlify.app/pm-skills.html" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PM Skills Pack",
+    "alternateName": "PM Skills Pack — 16 AI Agent Skills for Product Managers",
+    "description": "16 AI agent skills for Claude Code and Cursor covering the full PM workflow loop. Phases: Discover (customer calls, competitive research), Define (PRDs, roadmaps, OKRs), Build & Ship (sprint planning, engineering handoffs, launch briefs), and Operate (retrospectives, metrics analysis). Built to create a shared product intelligence layer across PM teams.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "macOS, Windows, Linux",
+    "url": "https://sree-kanth.netlify.app/pm-skills.html",
+    "featureList": [
+      "16 specialized AI agent skills",
+      "Claude Code and Cursor compatible",
+      "Shared project context layer",
+      "Customer discovery to PRD workflow",
+      "Competitive analysis automation",
+      "Engineering handoff templates",
+      "Exec review preparation"
+    ],
+    "keywords": "product manager AI tools, Claude Code skills, Cursor AI, PM workflow, PRD automation, product management AI",
+    "author": {
+      "@type": "Person",
+      "name": "Sreekanth Reddy",
+      "url": "https://sree-kanth.netlify.app"
+    },
+    "dateCreated": "2025",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Sreekanth Reddy Portfolio",
+      "url": "https://sree-kanth.netlify.app"
+    }
+  }
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sree-kanth.netlify.app/pm-skills.html" />
+  <meta property="og:title" content="PM Skills Pack — 16 AI Agent Skills for Product Managers" />
+  <meta property="og:description" content="16 agent skills for Claude Code and Cursor covering the full PM loop — discovery, PRDs, competitive analysis, engineering handoffs." />
+  <meta property="og:site_name" content="Sreekanth Reddy" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PM Skills Pack — 16 AI Agent Skills for Product Managers" />
+  <meta name="twitter:description" content="16 agent skills for Claude Code and Cursor covering the full PM loop — discovery, PRDs, competitive analysis, engineering handoffs." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/project-page.css" />
+  <style>
+    :root {
+      --hero-color: rgba(16,185,129,0.16);
+      --hero-accent: #10b981;
+      --hero-grad: linear-gradient(135deg, #10b981, #06b6d4);
+    }
+    .feature-icon { background: rgba(16,185,129,0.10); }
+    .stat-val { color: #10b981; }
+
+    /* ── Stats grid on narrow screens ── */
+    @media(max-width: 800px) {
+      .stats-row { display: grid; grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: 1px solid var(--card-border) !important; border-bottom: 1px solid var(--card-border); }
+      .stat-item:nth-child(2n) { border-right: none !important; }
+      .stat-item:last-child { border-bottom: none; grid-column: 1 / -1; border-right: none !important; }
+    }
+
+    /* ── Skills chip strip ── */
+    .sv-wrap { max-width: 900px; margin: 56px auto 0; }
+    .sv-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .sv-chip {
+      display: inline-flex; align-items: center;
+      padding: 8px 16px; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: .02em;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      border: 1px solid; white-space: nowrap;
+      transition: transform .15s;
+    }
+    .sv-chip:hover { transform: translateY(-2px); }
+    .sv-discover { background: rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.28); color: #c7d2fe; }
+    .sv-define   { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.28); color: #6ee7b7; }
+    .sv-root     { background: rgba(16,185,129,0.22); border-color: rgba(16,185,129,0.5);  color: #34d399; font-weight: 700; }
+    .sv-build    { background: rgba(249,115,22,0.12);  border-color: rgba(249,115,22,0.28);  color: #fed7aa; }
+    .sv-ops      { background: rgba(236,72,153,0.12);  border-color: rgba(236,72,153,0.28);  color: #fbcfe8; }
+    .sv-legend { max-width:900px; margin:14px auto 0; display:flex; gap:24px; justify-content:center; flex-wrap:wrap; }
+    .sv-legend span { font-size:0.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; }
+
+    /* ── Architecture row ── */
+    .arch-row {
+      display: flex; align-items: stretch; gap: 0;
+      border: 1px solid var(--card-border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 40px;
+    }
+    .arch-node { flex: 1; padding: 28px 24px; border-right: 1px solid var(--card-border); }
+    .arch-node:last-child { border-right: none; }
+    .arch-node-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--text-dim); margin-bottom: 10px;
+    }
+    .arch-node h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .arch-node p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+    .arch-node code { font-family: 'IBM Plex Mono', monospace; font-size: 0.8em; background: rgba(255,255,255,0.07); color: #6ee7b7; padding: 1px 6px; border-radius: 4px; }
+    .arch-node.root { background: rgba(16,185,129,0.05); border-right-color: rgba(16,185,129,0.25); }
+    .arch-node.root h4 { color: #10b981; }
+    @media(max-width:700px){
+      .arch-row { flex-direction: column; }
+      .arch-node { border-right: none; border-bottom: 1px solid var(--card-border); }
+      .arch-node:last-child { border-bottom: none; }
+    }
+
+    /* ── Phase sections ── */
+    .phase-label {
+      display: inline-flex; align-items: center;
+      padding: 5px 14px; border-radius: 999px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .phase-discover { background: rgba(99,102,241,0.14); color: #c7d2fe; }
+    .phase-define   { background: rgba(16,185,129,0.14); color: #6ee7b7; }
+    .phase-ship     { background: rgba(249,115,22,0.14);  color: #fed7aa; }
+    .phase-ops      { background: rgba(236,72,153,0.14);  color: #fbcfe8; }
+
+    .phase-section { margin-bottom: 52px; }
+    .phase-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 22px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .phase-header h3 {
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700;
+      margin: 0; color: var(--text);
+    }
+
+    /* ── Skill cards ── */
+    .skills-phase-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;
+    }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 20px 22px;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-2px); }
+    .skill-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--text); }
+    .skill-slug {
+      font-size: 0.73rem; color: #10b981; font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: .02em; margin-bottom: 10px; font-weight: 500;
+    }
+    .skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+    /* ── Impact table ── */
+    .impact-table {
+      width: 100%; border-collapse: collapse;
+      border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden;
+    }
+    .impact-table th {
+      background: rgba(255,255,255,0.04);
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--text-muted); padding: 14px 18px; text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .impact-table td {
+      padding: 16px 18px; font-size: 0.9rem; color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: top; line-height: 1.65;
+    }
+    .impact-table tr:last-child td { border-bottom: none; }
+    .impact-table td:first-child { color: var(--text); font-weight: 600; }
+    .impact-num {
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 800;
+      color: #10b981; display: block; line-height: 1.1;
+    }
+    @media(max-width:600px){
+      .impact-table th:last-child, .impact-table td:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="project-nav">
+  <a href="./index.html" class="nav-back">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-brand">PM Skills Pack</span>
+  <span style="font-size:0.78rem; font-weight:600; color:var(--text-muted);">Cursor · Claude Code</span>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag"><span class="dot"></span>Claude Code · Cursor · 2025</div>
+  <h1>16 Skills.<br><span class="grad">One System. The Full PM Loop.</span></h1>
+  <p class="hero-sub">
+    Most PMs use AI as a smarter search bar. This is something different — a structured pack of 16 agent skills covering the entire product workflow, from the first customer call to the engineering handoff, built for teams, not just individuals.
+  </p>
+  <div class="hero-btns">
+    <a href="#how-it-works" class="btn-primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      How It Works
+    </a>
+    <a href="./index.html#portfolio" class="btn-outline">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      More Work
+    </a>
+  </div>
+
+  <!-- Skills chip strip -->
+  <div class="sv-wrap">
+    <div class="sv-chips">
+      <span class="sv-chip sv-discover">customer-feedback</span>
+      <span class="sv-chip sv-discover">competitive-research-pm</span>
+      <span class="sv-chip sv-discover">video-content-summary</span>
+      <span class="sv-chip sv-define sv-root">★ project-context-builder</span>
+      <span class="sv-chip sv-define">product-manager</span>
+      <span class="sv-chip sv-define">ui-ux-product-designer</span>
+      <span class="sv-chip sv-define">prototype-builder</span>
+      <span class="sv-chip sv-build">engineering-leader</span>
+      <span class="sv-chip sv-build">technical-program-manager</span>
+      <span class="sv-chip sv-build">mobile-developer</span>
+      <span class="sv-chip sv-build">code-review</span>
+      <span class="sv-chip sv-build">tester-agent</span>
+      <span class="sv-chip sv-ops">project-orchestrator</span>
+      <span class="sv-chip sv-ops">documentation</span>
+      <span class="sv-chip sv-ops">secure-coding</span>
+      <span class="sv-chip sv-ops">security-manager-agent</span>
+    </div>
+  </div>
+  <div class="sv-legend">
+    <span style="color:#c7d2fe;">■ Discover</span>
+    <span style="color:#6ee7b7;">■ Define</span>
+    <span style="color:#fed7aa;">■ Build &amp; Ship</span>
+    <span style="color:#fbcfe8;">■ Operate</span>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="stats-row" style="max-width:900px; margin: 48px auto 0;">
+    <div class="stat-item">
+      <div class="stat-val">16</div>
+      <div class="stat-lbl">Agent Skills</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">3×</div>
+      <div class="stat-lbl">PRD Output Quality</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">4×</div>
+      <div class="stat-lbl">Competitive Analysis</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">~2 hrs</div>
+      <div class="stat-lbl">Saved Per Exec Review</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">2</div>
+      <div class="stat-lbl">AI Tools Supported</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div>
+      <div class="problem-label">The Problem</div>
+      <h2>AI for PMs has a cold-start problem</h2>
+      <p>Every time a PM opens a new chat, they re-explain the same context: what the product does, who the customers are, what's on the roadmap, what the latest pilot data says. Then they ask for a PRD.</p>
+      <p>The AI produces something generic. The PM pastes in more context. The output improves slightly. They repeat this every session, with every new task, across every team member.</p>
+      <p>The real problem isn't the model. It's that there's no shared product intelligence that any skill can read before it does anything.</p>
+    </div>
+    <ul class="pain-list">
+      <li><span class="icon">🔄</span>PMs re-brief AI with the same context every single session</li>
+      <li><span class="icon">🧩</span>Individual prompts — no workflow connecting customer call to PRD to eng handoff</li>
+      <li><span class="icon">👤</span>AI productivity stays personal, never becomes a team multiplier</li>
+      <li><span class="icon">📉</span>Generic output when AI doesn't know your personas, constraints, or JIRA format</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<section class="section" id="how-it-works">
+  <div class="section-tag">How It Works</div>
+  <h2>One context file.<br><span class="grad">All skills read it first.</span></h2>
+  <p class="section-desc">The architecture is simple: one master file holds your product's intelligence. Every skill reads it before acting. Build it once, share it with the team, and every AI output — PRDs, competitive briefs, pilot plans — starts from the same foundation.</p>
+
+  <div class="arch-row">
+    <div class="arch-node root">
+      <div class="arch-node-label">Foundation</div>
+      <h4>project-context-builder</h4>
+      <p>Crawls your wiki, JIRA roadmap, Figma links, and competitor URLs. Produces one scored <code>PROJECT_CONTEXT.md</code> — the shared product brain every other skill reads first.</p>
+    </div>
+    <div class="arch-node">
+      <div class="arch-node-label">Discovery</div>
+      <h4>customer-feedback</h4>
+      <p>Reads context first, then structures call transcripts into JIRA tickets that match your team's exact field format.</p>
+    </div>
+    <div class="arch-node">
+      <div class="arch-node-label">Build</div>
+      <h4>product-manager</h4>
+      <p>PRDs and roadmaps that already know your personas, constraints, and strategic goals — no briefing prompt needed.</p>
+    </div>
+    <div class="arch-node">
+      <div class="arch-node-label">Ship</div>
+      <h4>technical-program-manager</h4>
+      <p>Pilot plans and leadership decks that reflect your actual roadmap format, risks, and dependency chain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE 16 SKILLS -->
+<div class="problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">The 16 Skills</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px; color:var(--text);">Every phase of the PM workflow</h2>
+    <p style="color:var(--text-muted); font-size:1rem; max-width:600px; margin-bottom:52px; line-height:1.75;">Organized by where in your week you'd reach for them — not by technical category.</p>
+
+    <!-- Discover -->
+    <div class="phase-section">
+      <div class="phase-header">
+        <span class="phase-label phase-discover">Discover</span>
+        <h3>Understand what customers need</h3>
+      </div>
+      <div class="skills-phase-grid">
+        <div class="skill-card">
+          <div class="skill-name">After a Customer Call</div>
+          <div class="skill-slug">customer-feedback</div>
+          <p>Turns raw call notes or transcript into structured JIRA tickets, themes, and a signal summary — formatted to match your team's exact field patterns.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Competitive Research</div>
+          <div class="skill-slug">competitive-research-pm</div>
+          <p>Builds a structured competitive brief: positioning, gaps, differentiation angles — grounded in your product's actual goals from context.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Video Summary</div>
+          <div class="skill-slug">video-content-summary</div>
+          <p>Processes demo recordings, customer interviews, or conference talks into timestamped summaries with extractable quotes and themes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Define -->
+    <div class="phase-section">
+      <div class="phase-header">
+        <span class="phase-label phase-define">Define</span>
+        <h3>Shape and specify the work</h3>
+      </div>
+      <div class="skills-phase-grid">
+        <div class="skill-card">
+          <div class="skill-name">Product Manager</div>
+          <div class="skill-slug">product-manager</div>
+          <p>Drafts PRDs, roadmaps, and scope docs with full product context pre-loaded. Knows your personas, constraints, and goals without a briefing prompt.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">UX / Design</div>
+          <div class="skill-slug">ui-ux-product-designer</div>
+          <p>Structures interaction flows, surfaces edge cases, and suggests IA improvements — starting from the product's current design principles.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Clickable Demo</div>
+          <div class="skill-slug">prototype-builder</div>
+          <p>Builds a polished HTML/CSS prototype from a rough description. Dark-theme first, no frameworks, ready to share with stakeholders in minutes.</p>
+        </div>
+        <div class="skill-card" style="border-color: rgba(16,185,129,0.3);">
+          <div class="skill-name">Project Context ★</div>
+          <div class="skill-slug">project-context-builder</div>
+          <p>The foundation skill. Crawls wiki, JIRA, Figma, and competitor URLs. Run once — every other skill reads this file before acting.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build & Ship -->
+    <div class="phase-section">
+      <div class="phase-header">
+        <span class="phase-label phase-ship">Build &amp; Ship</span>
+        <h3>Drive engineering to done</h3>
+      </div>
+      <div class="skills-phase-grid">
+        <div class="skill-card">
+          <div class="skill-name">Engineering Direction</div>
+          <div class="skill-slug">engineering-leader</div>
+          <p>Translates product requirements into technical direction: architecture trade-offs, sequencing recommendations, and risks flagged before the sprint starts.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Program / Pilot Lead</div>
+          <div class="skill-slug">technical-program-manager</div>
+          <p>Generates pilot plans, risk matrices, and dependency maps. Produces HTML status decks formatted for leadership review — risks, owners, next two weeks.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Mobile Developer</div>
+          <div class="skill-slug">mobile-developer</div>
+          <p>React Native implementation support: component scaffolding, navigation patterns, and platform-specific edge case handling.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Code Review</div>
+          <div class="skill-slug">code-review</div>
+          <p>Reviews diffs against your team's conventions and the product's technical constraints — not just style, but architectural coherence.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Testing &amp; QA</div>
+          <div class="skill-slug">tester-agent</div>
+          <p>Generates test plans, edge cases, and regression checklists from feature specs — organized by user journey, not just function.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operate -->
+    <div class="phase-section">
+      <div class="phase-header">
+        <span class="phase-label phase-ops">Operate</span>
+        <h3>Communicate, protect, and orchestrate</h3>
+      </div>
+      <div class="skills-phase-grid">
+        <div class="skill-card">
+          <div class="skill-name">Project Orchestrator</div>
+          <div class="skill-slug">project-orchestrator</div>
+          <p>Plans multi-step work as phases, pauses for your approval between each phase, and routes to the right skill. The conductor, not a doer.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Documentation</div>
+          <div class="skill-slug">documentation</div>
+          <p>Generates internal wiki pages, API docs, runbooks, and onboarding guides — formatted to your team's conventions from context.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Secure Coding</div>
+          <div class="skill-slug">secure-coding</div>
+          <p>Audits code for OWASP top 10 vulnerabilities, flags risky patterns, and suggests hardened alternatives without blocking the build.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Security Assessment</div>
+          <div class="skill-slug">security-manager-agent</div>
+          <p>Produces a structured security assessment for a feature or system — threat model, attack vectors, risk rating, and mitigation roadmap.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IMPACT -->
+<section class="section">
+  <div class="section-tag">Measured Impact</div>
+  <h2>What changes when context<br><span class="grad">is shared, not re-typed.</span></h2>
+  <p class="section-desc">Estimated uplift in output quality for common PM tasks — with full project context loaded vs. starting cold each session. The multiplier comes from the AI knowing your product, not from a better model.</p>
+
+  <table class="impact-table">
+    <thead>
+      <tr>
+        <th>PM Task</th>
+        <th>Uplift</th>
+        <th>What changes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Writing a PRD</td>
+        <td><span class="impact-num">3×</span>quality</td>
+        <td>Output already knows your personas, strategic constraints, and JIRA format — skips the briefing paragraph, starts at the substance</td>
+      </tr>
+      <tr>
+        <td>Competitive analysis</td>
+        <td><span class="impact-num">4×</span>quality</td>
+        <td>Structured against your actual positioning and roadmap gaps, not a generic feature comparison matrix</td>
+      </tr>
+      <tr>
+        <td>Weekly roadmap session</td>
+        <td><span class="impact-num">~45 min</span>saved</td>
+        <td>Status, risks, and next-two-weeks generated from context — no manual deck assembly for recurring check-ins</td>
+      </tr>
+      <tr>
+        <td>Exec review prep</td>
+        <td><span class="impact-num">~2 hrs</span>saved</td>
+        <td>Leadership-formatted HTML decks with pilot status, metrics, and risks, produced from context in one pass</td>
+      </tr>
+      <tr>
+        <td>Onboarding a new PM</td>
+        <td><span class="impact-num" style="font-size:1rem;">Minutes</span><span style="font-size:0.8rem; color:var(--text-dim);">not 3 briefing calls</span></td>
+        <td>A new team member runs project-context-builder once and has the full product brief, key links, personas, and roadmap format instantly</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PRODUCT THINKING -->
+<div class="problem-section">
+  <div style="max-width:1100px; margin:0 auto; padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px);">
+    <div class="section-tag">Product Thinking</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px; color:var(--text);">Decisions that make this a product, not a prompt library</h2>
+    <p style="color:var(--text-muted); font-size:1rem; max-width:600px; margin-bottom:48px; line-height:1.75;">Packaging AI behavior as reusable, team-shareable skills requires the same product thinking as any shipped feature. These are the non-obvious decisions.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Context is infrastructure, not a prompt</h3>
+        <p>Most PM AI toolkits treat context as something you paste in before each query. Here it's a versioned artifact — <code style="font-family:'IBM Plex Mono',monospace; font-size:0.82em; background:rgba(255,255,255,0.07); color:#6ee7b7; padding:1px 5px; border-radius:3px;">PROJECT_CONTEXT.md</code> — that lives in the repo, gets refreshed as the product evolves, and is read by every skill automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔀</div>
+        <h3>Two AI tools, one pack</h3>
+        <p>Cursor and Claude Code store skills in different hidden folders. Rather than forcing a choice, the pack includes both layouts. PMs who prefer Cursor and engineers who prefer Claude Code use the same skill set on the same repo — no divergence, no duplicate maintenance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚦</div>
+        <h3>Orchestrator pattern: phases, not automation</h3>
+        <p>The project-orchestrator plans work in phases and pauses for your approval between each one. Autonomous multi-step execution in high-stakes PM work (a PRD that auto-generates tickets) has too high a blast radius. The orchestrator is a planner with a human in the loop.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3>JIRA format from tickets, not rules</h3>
+        <p>Rather than prescribing a JIRA field format, skills read your team's actual reference tickets from context. Output mirrors your team's exact Epic and Bug structure — even unconventional ones — without a configuration file.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🪜</div>
+        <h3>Designed for non-technical PMs</h3>
+        <p>Installation is three terminal commands — documented with Windows and Mac variants, with fallbacks for no-Git environments. A PM who has never touched a dotfile can install from a ZIP, copy two folders, and be running in under 10 minutes.</p>
+      </div>
+      <div class="feature-card" style="border-left: 3px solid #10b981;">
+        <div class="feature-icon">📣</div>
+        <h3>Built to be a team multiplier</h3>
+        <p>Personal prompt libraries stay personal. Publishing on a shared org repo makes it a team asset — another PM can use it immediately, contribute a skill back, and the whole team improves together. The value compounds when context and skill improvements are shared, not siloed.</p>
+        <p style="font-size:0.85rem; color:#10b981; margin-top:12px; font-weight:600;">→ Published on AIFoundations</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY I BUILT THIS -->
+<section class="section" style="padding-top: 60px; padding-bottom: 80px;">
+  <div class="highlight-box">
+    <strong>Why I built this:</strong> I was using Claude for maybe 20% of what it was actually capable of — because every session started cold. I'd spend the first few minutes re-explaining Brand Concierge, our customers, our roadmap, and what I needed. Every other PM on the team was doing the same thing independently. The real waste wasn't the briefing time. It was that no one's context improvements were accumulating into a shared resource. This pack was built to fix that: one context file the whole team maintains, 16 skills that read it, and a shared repo that turns individual improvements into a compound team asset.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="project-footer">
+  <p>PM Skills Pack · Sreekanth Reddy · 2025</p>
+  <a href="./index.html" class="footer-back">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>
