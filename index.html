@@ -1046,6 +1046,48 @@
 
     .mobile-nav a:hover { background: var(--card); color: var(--text); }
 
+    /* ─── MY TWO CENTS ─── */
+    .tc-chip {
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: var(--card); color: var(--text-muted);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background .15s, border-color .15s, color .15s;
+      white-space: nowrap;
+    }
+    .tc-chip:hover { border-color: rgba(255,255,255,0.18); color: var(--text); }
+    .tc-chip--active {
+      background: var(--primary); border-color: var(--primary);
+      color: #fff;
+    }
+    .tc-card {
+      break-inside: avoid;
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 20px 22px;
+      margin-bottom: 18px;
+      transition: border-color .2s, transform .2s;
+      display: block;
+    }
+    .tc-card:hover { border-color: rgba(255,255,255,0.13); transform: translateY(-2px); }
+    .tc-card-text {
+      font-size: 0.93rem; line-height: 1.65; color: var(--text);
+      margin-bottom: 14px;
+    }
+    .tc-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px;
+    }
+    .tc-tag {
+      font-size: 0.7rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 999px; letter-spacing: .05em;
+    }
+    .tc-date {
+      font-size: 0.72rem; color: var(--text-dim); font-family: 'Inter', sans-serif;
+    }
+    @media(max-width:900px) { #tc-grid { columns: 2; } }
+    @media(max-width:560px) { #tc-grid { columns: 1; } }
+
     /* ─── GLOW ORBS ─── */
     .orb {
       position: absolute; border-radius: 50%; filter: blur(80px);
@@ -1065,6 +1107,7 @@
       <li><a href="#career">Career</a></li>
       <li><a href="#patents">Patents</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#two-cents">My Two Cents</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
     <div class="hamburger" id="hamburger" onclick="toggleNav()">
@@ -1079,6 +1122,7 @@
     <a href="#career" onclick="toggleNav()">Career</a>
     <a href="#patents" onclick="toggleNav()">Patents</a>
     <a href="#skills" onclick="toggleNav()">Skills</a>
+    <a href="#two-cents" onclick="toggleNav()">My Two Cents</a>
     <a href="#contact" onclick="toggleNav()">Contact</a>
   </div>
 
@@ -2018,6 +2062,66 @@
     </div>
   </section>
 
+  <!-- ─── MY TWO CENTS ─── -->
+  <section id="two-cents" style="padding: clamp(80px,10vw,120px) clamp(20px,5vw,80px); background: var(--surface);">
+    <div style="max-width:1100px; margin:0 auto;">
+
+      <div class="section-header reveal" style="text-align:left; margin-bottom:40px;">
+        <div class="section-tag">My Two Cents</div>
+        <h2 class="section-title" style="text-align:left;">Insights, Analogies &amp; <span class="grad">Observations</span></h2>
+        <p class="section-sub" style="text-align:left; max-width:560px;">Short thoughts from working at the edge of AI, product, and enterprise — things I find interesting enough to write down.</p>
+      </div>
+
+      <!-- Controls -->
+      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:28px;">
+
+        <!-- Search -->
+        <div style="position:relative; flex:1; min-width:220px; max-width:340px;">
+          <svg style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-dim); pointer-events:none;" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="tc-search" type="text" placeholder="Search insights…" autocomplete="off"
+            style="width:100%; padding:9px 12px 9px 36px; border-radius:10px; border:1px solid var(--card-border); background:var(--card); color:var(--text); font-size:0.875rem; font-family:'Inter',sans-serif; outline:none; transition:border-color .2s;"
+            onfocus="this.style.borderColor='rgba(99,102,241,0.5)'" onblur="this.style.borderColor=''" />
+        </div>
+
+        <!-- Topic chips -->
+        <div id="tc-topics" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="tc-chip tc-chip--active" data-topic="all">All</button>
+          <button class="tc-chip" data-topic="AI">🤖 AI</button>
+          <button class="tc-chip" data-topic="Product">📦 Product</button>
+          <button class="tc-chip" data-topic="Strategy">♟️ Strategy</button>
+          <button class="tc-chip" data-topic="Leadership">🤝 Leadership</button>
+          <button class="tc-chip" data-topic="Tech">⚙️ Tech</button>
+          <button class="tc-chip" data-topic="Culture">🌱 Culture</button>
+        </div>
+
+        <!-- Date range -->
+        <select id="tc-date" style="padding:9px 14px; border-radius:10px; border:1px solid var(--card-border); background:var(--card); color:var(--text-muted); font-size:0.85rem; font-family:'Inter',sans-serif; cursor:pointer; outline:none;">
+          <option value="all">All time</option>
+          <option value="month">This month</option>
+          <option value="3months">Last 3 months</option>
+          <option value="6months">Last 6 months</option>
+          <option value="year">This year</option>
+        </select>
+      </div>
+
+      <!-- Result count -->
+      <div id="tc-count" style="font-size:0.8rem; color:var(--text-dim); margin-bottom:20px; font-family:'Inter',sans-serif;"></div>
+
+      <!-- Cards grid -->
+      <div id="tc-grid" style="columns:3; column-gap:18px;">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Empty state -->
+      <div id="tc-empty" style="display:none; text-align:center; padding:60px 20px; color:var(--text-dim);">
+        <div style="font-size:2rem; margin-bottom:12px;">🔍</div>
+        <p style="font-size:1rem;">No insights match your filters.</p>
+        <button onclick="resetTwoCents()" style="margin-top:16px; padding:8px 20px; border-radius:8px; border:1px solid var(--card-border); background:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem;">Clear filters</button>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ─── CTA ─── -->
   <section class="cta-section" id="contact">
     <div class="cta-box reveal">
@@ -2162,6 +2266,128 @@
         document.getElementById('mobile-nav').classList.remove('open');
       });
     });
+
+    // ─── MY TWO CENTS ───
+    const TAG_STYLES = {
+      'AI':         { bg: 'rgba(34,211,238,0.12)',  color: '#22d3ee' },
+      'Product':    { bg: 'rgba(99,102,241,0.14)',  color: '#a5b4fc' },
+      'Strategy':   { bg: 'rgba(245,158,11,0.14)',  color: '#fcd34d' },
+      'Leadership': { bg: 'rgba(236,72,153,0.13)',  color: '#f9a8d4' },
+      'Tech':       { bg: 'rgba(59,130,246,0.14)',  color: '#93c5fd' },
+      'Culture':    { bg: 'rgba(16,185,129,0.13)',  color: '#6ee7b7' },
+    };
+
+    let allInsights = [];
+    let activeTopic = 'all';
+    let activeDateRange = 'all';
+    let searchQuery = '';
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function isInDateRange(dateStr, range) {
+      if (range === 'all') return true;
+      const d = new Date(dateStr);
+      const now = new Date();
+      const diffMs = now - d;
+      const diffDays = diffMs / (1000 * 60 * 60 * 24);
+      if (range === 'month')   return diffDays <= 30;
+      if (range === '3months') return diffDays <= 90;
+      if (range === '6months') return diffDays <= 180;
+      if (range === 'year')    return d.getFullYear() === now.getFullYear();
+      return true;
+    }
+
+    function renderInsights() {
+      const grid = document.getElementById('tc-grid');
+      const empty = document.getElementById('tc-empty');
+      const countEl = document.getElementById('tc-count');
+      const q = searchQuery.toLowerCase().trim();
+
+      const filtered = allInsights.filter(ins => {
+        const matchTopic = activeTopic === 'all' || ins.tag === activeTopic;
+        const matchDate  = isInDateRange(ins.date, activeDateRange);
+        const matchSearch = !q || ins.text.toLowerCase().includes(q) || ins.tag.toLowerCase().includes(q);
+        return matchTopic && matchDate && matchSearch;
+      });
+
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+        countEl.textContent = '';
+        return;
+      }
+
+      grid.style.display = '';
+      empty.style.display = 'none';
+      countEl.textContent = `Showing ${filtered.length} insight${filtered.length !== 1 ? 's' : ''}`;
+
+      filtered.forEach(ins => {
+        const ts = TAG_STYLES[ins.tag] || { bg: 'rgba(255,255,255,0.08)', color: '#94a3b8' };
+        const card = document.createElement('div');
+        card.className = 'tc-card';
+        card.innerHTML = `
+          <p class="tc-card-text">${ins.text}</p>
+          <div class="tc-card-footer">
+            <span class="tc-tag" style="background:${ts.bg}; color:${ts.color};">${ins.tag}</span>
+            <span class="tc-date">${formatDate(ins.date)}</span>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    function resetTwoCents() {
+      activeTopic = 'all';
+      activeDateRange = 'all';
+      searchQuery = '';
+      document.getElementById('tc-search').value = '';
+      document.getElementById('tc-date').value = 'all';
+      document.querySelectorAll('.tc-chip').forEach(c => c.classList.remove('tc-chip--active'));
+      document.querySelector('.tc-chip[data-topic="all"]').classList.add('tc-chip--active');
+      renderInsights();
+    }
+
+    // Topic chips
+    document.getElementById('tc-topics').addEventListener('click', e => {
+      const btn = e.target.closest('.tc-chip');
+      if (!btn) return;
+      document.querySelectorAll('.tc-chip').forEach(c => c.classList.remove('tc-chip--active'));
+      btn.classList.add('tc-chip--active');
+      activeTopic = btn.dataset.topic;
+      renderInsights();
+    });
+
+    // Date range
+    document.getElementById('tc-date').addEventListener('change', e => {
+      activeDateRange = e.target.value;
+      renderInsights();
+    });
+
+    // Search (debounced)
+    let searchTimer;
+    document.getElementById('tc-search').addEventListener('input', e => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        searchQuery = e.target.value;
+        renderInsights();
+      }, 220);
+    });
+
+    // Load insights.json
+    fetch('./insights.json')
+      .then(r => r.json())
+      .then(data => {
+        allInsights = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        renderInsights();
+      })
+      .catch(() => {
+        document.getElementById('tc-count').textContent = 'Could not load insights.';
+      });
+
   </script>
 </body>
 </html>
