@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Two Cents — Sreekanth Reddy</title>
+  <meta name="description" content="Insights, analogies and observations on AI, product, strategy and leadership by Sreekanth Reddy — Principal PM at Adobe." />
+  <meta name="author" content="Sreekanth Reddy" />
+  <link rel="canonical" href="https://sree-kanth.netlify.app/two-cents.html" />
+  <meta property="og:title" content="My Two Cents — Sreekanth Reddy" />
+  <meta property="og:description" content="Short thoughts on AI, product, strategy and leadership from the edge of enterprise AI." />
+  <meta property="og:url" content="https://sree-kanth.netlify.app/two-cents.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="./insights-data.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #040b1a;
+      --surface: #07112b;
+      --card: rgba(255,255,255,0.034);
+      --card-border: rgba(255,255,255,0.072);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
+      --radius: 14px;
+      --accent: #f97316;
+      --accent2: #f59e0b;
+      --accent-glow: rgba(249,115,22,0.15);
+      --grad: linear-gradient(135deg, #f97316, #f59e0b);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px,5vw,60px); height: 64px;
+      background: rgba(4,11,26,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-count {
+      font-size: 0.78rem; color: var(--text-dim);
+      background: var(--card); border: 1px solid var(--card-border);
+      padding: 4px 12px; border-radius: 999px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px) 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -100px; left: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(249,115,22,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.25);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem,6vw,4rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+    .hero h1 span {
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(1rem,2vw,1.15rem);
+      color: var(--text-muted); max-width: 540px; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── SEARCH BAR ── */
+    .search-wrap {
+      position: relative; max-width: 480px;
+    }
+    .search-wrap svg {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); color: var(--text-dim);
+      pointer-events: none;
+    }
+    #tc-search {
+      width: 100%; padding: 13px 16px 13px 42px;
+      border-radius: 12px; border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text); font-size: 0.95rem;
+      font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color .2s, background .2s;
+    }
+    #tc-search:focus {
+      border-color: rgba(249,115,22,0.4);
+      background: rgba(249,115,22,0.04);
+    }
+    #tc-search::placeholder { color: var(--text-dim); }
+
+    /* ── LAYOUT ── */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(20px,5vw,80px) 100px;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: sticky; top: 80px;
+      padding: 28px 24px 28px 0;
+      border-right: 1px solid var(--card-border);
+    }
+    .sidebar-section { margin-bottom: 32px; }
+    .sidebar-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .topic-list { display: flex; flex-direction: column; gap: 4px; }
+    .topic-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; border-radius: 8px;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 0.875rem;
+      font-family: 'Inter', sans-serif; font-weight: 500;
+      text-align: left; transition: background .15s, color .15s;
+      width: 100%;
+    }
+    .topic-btn:hover { background: var(--card); color: var(--text); }
+    .topic-btn.active {
+      background: rgba(249,115,22,0.12);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .topic-count {
+      font-size: 0.72rem; color: var(--text-dim);
+      background: var(--card); border: 1px solid var(--card-border);
+      padding: 2px 8px; border-radius: 999px; min-width: 24px;
+      text-align: center;
+    }
+    .topic-btn.active .topic-count {
+      background: rgba(249,115,22,0.15); border-color: rgba(249,115,22,0.25);
+      color: var(--accent);
+    }
+
+    .date-options { display: flex; flex-direction: column; gap: 4px; }
+    .date-btn {
+      padding: 7px 12px; border-radius: 8px;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 0.875rem;
+      font-family: 'Inter', sans-serif; text-align: left;
+      transition: background .15s, color .15s; width: 100%;
+    }
+    .date-btn:hover { background: var(--card); color: var(--text); }
+    .date-btn.active { color: var(--accent); font-weight: 600; }
+
+    /* ── CONTENT AREA ── */
+    .content {
+      padding: 28px 0 0 36px;
+    }
+
+    /* ── META BAR ── */
+    .meta-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; flex-wrap: wrap; gap: 8px;
+    }
+    #tc-count {
+      font-size: 0.82rem; color: var(--text-dim);
+    }
+    .reset-btn {
+      font-size: 0.78rem; color: var(--text-dim);
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: color .2s;
+    }
+    .reset-btn:hover { color: var(--accent); }
+
+    /* ── FEATURED CARD ── */
+    .featured-card {
+      background: linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(245,158,11,0.06) 100%);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: var(--radius); padding: 32px 36px;
+      margin-bottom: 28px; position: relative; overflow: hidden;
+    }
+    .featured-card::before {
+      content: '"';
+      position: absolute; top: -20px; right: 20px;
+      font-size: 10rem; line-height: 1;
+      color: rgba(249,115,22,0.07);
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800;
+      pointer-events: none;
+    }
+    .featured-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .featured-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.1rem,2.5vw,1.4rem);
+      font-weight: 600; line-height: 1.5; color: var(--text);
+      margin-bottom: 20px;
+    }
+    .featured-footer {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    /* ── CARD GRID ── */
+    #tc-grid {
+      columns: 2; column-gap: 16px;
+    }
+    .tc-card {
+      break-inside: avoid;
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: var(--radius); padding: 22px 24px;
+      margin-bottom: 16px;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+    }
+    .tc-card:hover {
+      border-color: rgba(249,115,22,0.25);
+      transform: translateY(-2px);
+    }
+    .tc-card-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: .1em;
+      color: var(--text-dim); text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .tc-card-text {
+      font-size: 0.92rem; line-height: 1.68;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .tc-card-footer {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
+    }
+    .tc-tag {
+      font-size: 0.68rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+      letter-spacing: .04em;
+    }
+    .tc-date {
+      font-size: 0.72rem; color: var(--text-dim);
+    }
+    .tc-copy {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-dim); padding: 4px;
+      border-radius: 6px; transition: color .15s, background .15s;
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.7rem; font-family: 'Inter', sans-serif;
+    }
+    .tc-copy:hover { color: var(--accent); background: rgba(249,115,22,0.08); }
+    .tc-copy.copied { color: #22c55e; }
+
+    /* ── TAG COLORS ── */
+    .tag-AI         { background: rgba(34,211,238,0.12); color: #22d3ee; }
+    .tag-Product    { background: rgba(99,102,241,0.14); color: #a5b4fc; }
+    .tag-Strategy   { background: rgba(245,158,11,0.14); color: #fcd34d; }
+    .tag-Leadership { background: rgba(236,72,153,0.13); color: #f9a8d4; }
+    .tag-Tech       { background: rgba(59,130,246,0.14); color: #93c5fd; }
+    .tag-Culture    { background: rgba(16,185,129,0.13); color: #6ee7b7; }
+
+    /* ── EMPTY STATE ── */
+    #tc-empty {
+      display: none; text-align: center;
+      padding: 80px 20px; color: var(--text-dim);
+    }
+    #tc-empty p { margin-top: 12px; font-size: 1rem; }
+
+    /* ── MOBILE SIDEBAR TOGGLE ── */
+    .mobile-filters {
+      display: none;
+      padding: 0 clamp(20px,5vw,80px) 20px;
+    }
+    .mobile-chips {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .mobile-chip {
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: var(--card); color: var(--text-muted);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif; white-space: nowrap;
+      transition: all .15s;
+    }
+    .mobile-chip.active {
+      background: rgba(249,115,22,0.15);
+      border-color: rgba(249,115,22,0.35);
+      color: var(--accent);
+    }
+    .mobile-date {
+      padding: 8px 14px; border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: var(--card); color: var(--text-muted);
+      font-size: 0.85rem; font-family: 'Inter', sans-serif;
+      cursor: pointer; outline: none;
+    }
+
+    @media(max-width: 860px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-filters { display: block; }
+      .content { padding: 0; }
+      #tc-grid { columns: 1; }
+    }
+    @media(max-width: 600px) {
+      .featured-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="./index.html" class="nav-back">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-brand">My Two Cents</span>
+  <span class="nav-count" id="nav-count">— insights</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">✦ Insights &amp; Observations</div>
+  <h1>My Two <span>Cents.</span></h1>
+  <p class="hero-sub">Short thoughts from working at the edge of AI, product, and enterprise — things I find interesting enough to write down.</p>
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="tc-search" type="text" placeholder="Search insights…" autocomplete="off" />
+  </div>
+</div>
+
+<!-- MOBILE FILTERS -->
+<div class="mobile-filters">
+  <div class="mobile-chips" id="mobile-topic-chips"></div>
+  <select class="mobile-date" id="mobile-date">
+    <option value="all">All time</option>
+    <option value="month">This month</option>
+    <option value="3months">Last 3 months</option>
+    <option value="6months">Last 6 months</option>
+    <option value="year">This year</option>
+  </select>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Topic</div>
+      <div class="topic-list" id="topic-list"></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Date Range</div>
+      <div class="date-options">
+        <button class="date-btn active" data-range="all">All time</button>
+        <button class="date-btn" data-range="month">This month</button>
+        <button class="date-btn" data-range="3months">Last 3 months</button>
+        <button class="date-btn" data-range="6months">Last 6 months</button>
+        <button class="date-btn" data-range="year">This year</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div class="meta-bar">
+      <span id="tc-count"></span>
+      <button class="reset-btn" id="reset-btn" onclick="resetFilters()" style="display:none;">✕ Clear filters</button>
+    </div>
+
+    <!-- Featured card (top insight) -->
+    <div class="featured-card" id="featured-card" style="display:none;">
+      <div class="featured-label">✦ Latest</div>
+      <p class="featured-text" id="featured-text"></p>
+      <div class="featured-footer">
+        <span class="tc-tag" id="featured-tag"></span>
+        <span class="tc-date" id="featured-date"></span>
+        <button class="tc-copy" onclick="copyText(this, document.getElementById('featured-text').textContent)">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards grid -->
+    <div id="tc-grid"></div>
+
+    <!-- Empty state -->
+    <div id="tc-empty">
+      <div style="font-size:2.5rem;">🔍</div>
+      <p>No insights match your filters.</p>
+      <button onclick="resetFilters()" style="margin-top:16px; padding:8px 20px; border-radius:8px; border:1px solid rgba(249,115,22,0.3); background:rgba(249,115,22,0.08); color:var(--accent); cursor:pointer; font-size:0.85rem; font-family:'Inter',sans-serif;">Clear filters</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const TAG_STYLES = {
+    'AI':         'tag-AI',
+    'Product':    'tag-Product',
+    'Strategy':   'tag-Strategy',
+    'Leadership': 'tag-Leadership',
+    'Tech':       'tag-Tech',
+    'Culture':    'tag-Culture',
+  };
+
+  const TAG_EMOJI = {
+    'AI': '🤖', 'Product': '📦', 'Strategy': '♟️',
+    'Leadership': '🤝', 'Tech': '⚙️', 'Culture': '🌱',
+  };
+
+  let activeTopic = 'all';
+  let activeDateRange = 'all';
+  let searchQuery = '';
+
+  const insights = (window.INSIGHTS_DATA || []).sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  function formatDate(d) {
+    return new Date(d).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+  }
+
+  function inDateRange(dateStr, range) {
+    if (range === 'all') return true;
+    const diff = (new Date() - new Date(dateStr)) / 86400000;
+    if (range === 'month')   return diff <= 30;
+    if (range === '3months') return diff <= 90;
+    if (range === '6months') return diff <= 180;
+    if (range === 'year')    return new Date(dateStr).getFullYear() === new Date().getFullYear();
+    return true;
+  }
+
+  function getFiltered() {
+    const q = searchQuery.toLowerCase();
+    return insights.filter(i => {
+      const matchTopic = activeTopic === 'all' || i.tag === activeTopic;
+      const matchDate  = inDateRange(i.date, activeDateRange);
+      const matchSearch = !q || i.text.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q);
+      return matchTopic && matchDate && matchSearch;
+    });
+  }
+
+  function copyText(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy`;
+      }, 2000);
+    });
+  }
+
+  function buildCard(ins, index) {
+    const div = document.createElement('div');
+    div.className = 'tc-card';
+    div.innerHTML = `
+      <div class="tc-card-num"># ${String(index + 1).padStart(2,'0')}</div>
+      <p class="tc-card-text">${ins.text}</p>
+      <div class="tc-card-footer">
+        <span class="tc-tag ${TAG_STYLES[ins.tag] || ''}">${ins.tag}</span>
+        <span class="tc-date">${formatDate(ins.date)}</span>
+        <button class="tc-copy" onclick="copyText(this, \`${ins.text.replace(/`/g,"'")}\`)">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>`;
+    return div;
+  }
+
+  function render() {
+    const filtered = getFiltered();
+    const grid = document.getElementById('tc-grid');
+    const empty = document.getElementById('tc-empty');
+    const countEl = document.getElementById('tc-count');
+    const featured = document.getElementById('featured-card');
+    const isFiltering = activeTopic !== 'all' || activeDateRange !== 'all' || searchQuery;
+    document.getElementById('reset-btn').style.display = isFiltering ? '' : 'none';
+
+    grid.innerHTML = '';
+
+    if (filtered.length === 0) {
+      featured.style.display = 'none';
+      grid.style.display = 'none';
+      empty.style.display = 'block';
+      countEl.textContent = 'No results';
+      return;
+    }
+
+    empty.style.display = 'none';
+    grid.style.display = '';
+    countEl.textContent = `${filtered.length} insight${filtered.length !== 1 ? 's' : ''}`;
+
+    // Featured = first result
+    const top = filtered[0];
+    document.getElementById('featured-text').textContent = top.text;
+    document.getElementById('featured-tag').className = `tc-tag ${TAG_STYLES[top.tag] || ''}`;
+    document.getElementById('featured-tag').textContent = top.tag;
+    document.getElementById('featured-date').textContent = formatDate(top.date);
+    featured.style.display = '';
+
+    // Rest in grid
+    filtered.slice(1).forEach((ins, i) => {
+      grid.appendChild(buildCard(ins, i));
+    });
+  }
+
+  // ── Sidebar topic list
+  function buildSidebar() {
+    const topics = ['all', ...Object.keys(TAG_STYLES)];
+    const list = document.getElementById('topic-list');
+    const mobileChips = document.getElementById('mobile-topic-chips');
+
+    topics.forEach(t => {
+      const count = t === 'all' ? insights.length : insights.filter(i => i.tag === t).length;
+      const label = t === 'all' ? 'All' : `${TAG_EMOJI[t] || ''} ${t}`;
+
+      // Desktop button
+      const btn = document.createElement('button');
+      btn.className = `topic-btn${t === 'all' ? ' active' : ''}`;
+      btn.dataset.topic = t;
+      btn.innerHTML = `<span>${label}</span><span class="topic-count">${count}</span>`;
+      btn.onclick = () => setTopic(t);
+      list.appendChild(btn);
+
+      // Mobile chip
+      const chip = document.createElement('button');
+      chip.className = `mobile-chip${t === 'all' ? ' active' : ''}`;
+      chip.dataset.topic = t;
+      chip.textContent = label;
+      chip.onclick = () => setTopic(t);
+      mobileChips.appendChild(chip);
+    });
+
+    document.getElementById('nav-count').textContent = `${insights.length} insights`;
+  }
+
+  function setTopic(t) {
+    activeTopic = t;
+    document.querySelectorAll('.topic-btn').forEach(b => b.classList.toggle('active', b.dataset.topic === t));
+    document.querySelectorAll('.mobile-chip').forEach(b => b.classList.toggle('active', b.dataset.topic === t));
+    render();
+  }
+
+  function setDateRange(r) {
+    activeDateRange = r;
+    document.querySelectorAll('.date-btn').forEach(b => b.classList.toggle('active', b.dataset.range === r));
+    document.getElementById('mobile-date').value = r;
+    render();
+  }
+
+  function resetFilters() {
+    searchQuery = '';
+    document.getElementById('tc-search').value = '';
+    setTopic('all');
+    setDateRange('all');
+  }
+
+  // ── Events
+  document.querySelectorAll('.date-btn').forEach(b => {
+    b.addEventListener('click', () => setDateRange(b.dataset.range));
+  });
+  document.getElementById('mobile-date').addEventListener('change', e => setDateRange(e.target.value));
+
+  let debounce;
+  document.getElementById('tc-search').addEventListener('input', e => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => { searchQuery = e.target.value; render(); }, 200);
+  });
+
+  // ── Init
+  buildSidebar();
+  render();
+</script>
+</body>
+</html>
