@@ -481,25 +481,46 @@
     }
 
     /* ─── ABOUT ─── */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: start;
-      max-width: 1200px; margin: 0 auto;
+    /* ── ABOUT CENTERED ── */
+    .about-centered {
+      max-width: 1100px; margin: 0 auto;
     }
 
-    .about-text h2 {
+    .about-centered-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
       font-weight: 700; letter-spacing: -0.5px;
-      margin-bottom: 20px; line-height: 1.2;
+      line-height: 1.2; margin-top: 14px;
+      text-align: center;
     }
 
-    .about-text p {
+    /* Stats strip */
+    .stats-strip {
+      display: flex; gap: 0;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .stats-strip-item {
+      flex: 1; padding: 28px 16px; text-align: center;
+      border-right: 1px solid var(--card-border);
+      background: var(--card); transition: var(--transition);
+    }
+    .stats-strip-item:last-child { border-right: none; }
+    .stats-strip-item:hover {
+      background: var(--card-hover);
+    }
+
+    /* Bio + achievements row */
+    .about-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: start;
+    }
+    .about-bio p {
       color: var(--text-muted); line-height: 1.8;
       margin-bottom: 16px; font-size: 0.95rem;
     }
-
-    .about-text p strong { color: var(--text); }
+    .about-bio p strong { color: var(--text); }
 
     .about-achievements {
       display: flex; flex-direction: column; gap: 16px;
@@ -532,32 +553,16 @@
     .achieve-text strong { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
     .achieve-text span { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* ─── STATS GRID ─── */
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
-    }
-
-    .stat-card {
-      background: var(--card); border: 1px solid var(--card-border);
-      border-radius: var(--radius); padding: 20px 16px;
-      text-align: center; transition: var(--transition);
-    }
-
-    .stat-card:hover {
-      background: var(--card-hover); border-color: rgba(99,102,241,0.2);
-      transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    }
-
-    .stat-card .big-num {
+    /* ─── STATS (shared big-num / sc-label) ─── */
+    .big-num {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 800;
+      font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 800;
       background: linear-gradient(135deg, #fff, #a5b4fc);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       line-height: 1;
     }
-
-    .stat-card .sc-label {
-      font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;
+    .sc-label {
+      font-size: 0.72rem; color: var(--text-muted); margin-top: 6px;
       font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
     }
 
@@ -1009,14 +1014,16 @@
       .hero-desc { margin: 0 auto; }
       .tag-1 { bottom: 10px; left: -10px; }
       .tag-2 { top: 10px; right: -10px; }
-      .about-grid { grid-template-columns: 1fr; }
+      .stats-strip { flex-wrap: wrap; }
+      .stats-strip-item { flex: 1 1 30%; }
+      .about-body { grid-template-columns: 1fr; gap: 36px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
     }
 
     @media (max-width: 600px) {
       .portfolio-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .stats-strip-item { flex: 1 1 45%; }
       .hero-stats { flex-wrap: wrap; gap: 20px; }
       .cta-box { padding: 36px 24px; }
       footer { flex-direction: column; text-align: center; }
@@ -1217,27 +1224,63 @@
 
   <!-- ─── ABOUT ─── -->
   <section id="about">
-    <div class="about-grid">
-      <div class="about-text reveal-left">
-        <div class="section-tag">About Me</div>
-        <h2>From Startup Founder<br/>to Enterprise AI Leader</h2>
-        <p>
-          My journey began as a <strong>founding team member</strong> of a B2B SaaS startup,
-          where I helped grow it from a 4-person team to over 100, building products used by
-          20,000+ small businesses — ultimately steering it through a successful acquisition.
-        </p>
-        <p>
-          At <strong>Adobe</strong>, I've spent the last five years at the intersection of
-          artificial intelligence and enterprise software. I've launched AI/ML capabilities,
-          pioneered conversational AI platforms, and built agentic systems that are redefining
-          how the world's largest companies engage with their customers.
-        </p>
-        <p>
-          I believe the best products are built at the intersection of <strong>deep technical
-          understanding</strong>, <strong>customer empathy</strong>, and <strong>ruthless
-          prioritization</strong>. My approach: start with the problem that actually matters,
-          then build the simplest thing that creates outsized value.
-        </p>
+    <div class="about-centered">
+
+      <!-- Heading -->
+      <div class="reveal" style="text-align:center; margin-bottom:48px;">
+        <div class="section-tag" style="display:inline-block;">About Me</div>
+        <h2 class="about-centered-title">From Startup Founder<br/>to Enterprise AI Leader</h2>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="stats-strip stagger">
+        <div class="stats-strip-item">
+          <div class="big-num">Millions</div>
+          <div class="sc-label">of Conversations</div>
+        </div>
+        <div class="stats-strip-item">
+          <div class="big-num">Billions</div>
+          <div class="sc-label">of Engagements</div>
+        </div>
+        <div class="stats-strip-item">
+          <div class="big-num counter" data-target="1000" data-prefix="" data-suffix="+">0</div>
+          <div class="sc-label">Enterprises Reached</div>
+        </div>
+        <div class="stats-strip-item">
+          <div class="big-num counter" data-target="12" data-prefix="" data-suffix="+ Yrs">0</div>
+          <div class="sc-label">Experience</div>
+        </div>
+        <div class="stats-strip-item">
+          <div class="big-num counter" data-target="9" data-prefix="" data-suffix="">0</div>
+          <div class="sc-label">AI/ML Patents</div>
+        </div>
+        <div class="stats-strip-item">
+          <div class="big-num counter" data-target="20" data-prefix="" data-suffix="K+">0</div>
+          <div class="sc-label">SMBs Served</div>
+        </div>
+      </div>
+
+      <!-- Bio + Achievements -->
+      <div class="about-body reveal">
+        <div class="about-bio">
+          <p>
+            My journey began as a <strong>founding team member</strong> of a B2B SaaS startup,
+            where I helped grow it from a 4-person team to over 100, building products used by
+            20,000+ small businesses — ultimately steering it through a successful acquisition.
+          </p>
+          <p>
+            At <strong>Adobe</strong>, I've spent the last five years at the intersection of
+            artificial intelligence and enterprise software. I've launched AI/ML capabilities,
+            pioneered conversational AI platforms, and built agentic systems that are redefining
+            how the world's largest companies engage with their customers.
+          </p>
+          <p>
+            I believe the best products are built at the intersection of <strong>deep technical
+            understanding</strong>, <strong>customer empathy</strong>, and <strong>ruthless
+            prioritization</strong>. My approach: start with the problem that actually matters,
+            then build the simplest thing that creates outsized value.
+          </p>
+        </div>
 
         <div class="about-achievements">
           <div class="achieve-item">
@@ -1271,34 +1314,6 @@
         </div>
       </div>
 
-      <div class="reveal-right">
-        <div class="stats-grid stagger">
-          <div class="stat-card">
-            <div class="big-num">Millions</div>
-            <div class="sc-label">of Conversations</div>
-          </div>
-          <div class="stat-card">
-            <div class="big-num">Billions</div>
-            <div class="sc-label">of Engagements</div>
-          </div>
-          <div class="stat-card">
-            <div class="big-num counter" data-target="1000" data-prefix="" data-suffix="+">0</div>
-            <div class="sc-label">Enterprises Reached</div>
-          </div>
-          <div class="stat-card">
-            <div class="big-num counter" data-target="12" data-prefix="" data-suffix="+ Yrs">0</div>
-            <div class="sc-label">Experience</div>
-          </div>
-          <div class="stat-card">
-            <div class="big-num counter" data-target="9" data-prefix="" data-suffix="">0</div>
-            <div class="sc-label">AI/ML Patents</div>
-          </div>
-          <div class="stat-card">
-            <div class="big-num counter" data-target="20" data-prefix="" data-suffix="K+">0</div>
-            <div class="sc-label">SMBs Served</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
