@@ -10,6 +10,12 @@
 
 window.INSIGHTS_DATA = [
   {
+    "id": 20,
+    "text": "SaaS is consolidating surfaces. Every company now has one question to answer: are you a surface where other tools plug in, or a plugin that lives inside someone else's surface? AI is redrawing that line — the primary surface is no longer where data lives, it's where intent gets executed. Claude Code, Cursor, Copilot are the new surfaces. Every other tool is becoming an MCP endpoint. The companies trying to be both will lose on both fronts. The real question for any PM: what is the irreplaceable action that only happens inside your product? If you can't answer that, you're a plugin — whether you admit it or not.",
+    "date": "2026-06-18",
+    "tag": "Strategy"
+  },
+  {
     "id": 19,
     "text": "MCP tools today are API wrappers with better packaging. Next stop: MCP tools as wrappers around agents. The abstraction layer keeps climbing the stack.",
     "date": "2026-05-07",
