@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I Use AI — Sreekanth Reddy</title>
+  <meta name="description" content="A living record of how I use AI for personal productivity, team leverage, and cross-functional self-serve." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9fafb;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --border: #e2e8f0;
+
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --teal: #0d9488;
+      --teal-light: #f0fdfa;
+      --violet: #7c3aed;
+      --violet-light: #f5f3ff;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+
+      --radius: 14px;
+      --radius-sm: 9px;
+      --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.05);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.04);
+      --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px,5vw,80px); height: 68px;
+      background: rgba(4,11,26,0.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+    }
+    .nav-logo {
+      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem;
+      background: linear-gradient(135deg,#fff 0%,#6366f1 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      letter-spacing:-.3px; text-decoration:none;
+    }
+    .nav-links { display:flex; gap:8px; list-style:none; align-items:center; }
+    .nav-links a { text-decoration:none; color:rgba(255,255,255,0.6); font-size:.85rem; font-weight:500; padding:6px 14px; border-radius:8px; transition:var(--transition); }
+    .nav-links a:hover { color:#fff; background:rgba(255,255,255,0.06); }
+    .nav-links a.active { color:#fff; background:rgba(255,255,255,0.1); }
+    .nav-cta { background:#6366f1!important; color:#fff!important; padding:8px 18px!important; }
+    .nav-cta:hover { background:#4f46e5!important; color:#fff!important; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 96px clamp(20px,7vw,100px) 60px;
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--blue-light); border: 1px solid rgba(37,99,235,.2);
+      padding: 4px 12px; border-radius: 100px;
+      font-size: .69rem; font-weight: 700; color: var(--blue);
+      letter-spacing: .7px; text-transform: uppercase; margin-bottom: 18px;
+    }
+    .live-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.6)} }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 800; letter-spacing: -2.5px; line-height: 1.06;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { font-style: normal; color: var(--blue); }
+    .hero-sub {
+      font-size: .95rem; color: var(--text-muted); line-height: 1.65;
+      max-width: 400px; margin-bottom: 28px;
+    }
+    .hero-sub strong { color: var(--text); }
+    .hero-scroll-hint {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .75rem; color: var(--text-dim); font-weight: 500;
+    }
+    .scroll-line { width: 28px; height: 1.5px; background: var(--border); }
+
+    /* Tool mosaic */
+    .tools-mosaic {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    }
+    .tool-tile {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 8px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .tool-tile:hover { border-color: var(--blue); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .tool-tile img { width: 24px; height: 24px; border-radius: 5px; object-fit: contain; }
+    .tool-tile-name { font-size: .65rem; font-weight: 600; color: var(--text-muted); text-align: center; line-height: 1.2; }
+    .tool-tile.driver { border-color: rgba(37,99,235,.25); background: var(--blue-light); }
+    .tool-tile.driver .tool-tile-name { color: var(--blue); }
+
+    /* ── SECTIONS ── */
+    .section-wrapper { padding: 0 clamp(20px,7vw,100px) 72px; max-width: 1280px; margin: 0 auto; }
+
+    .section-head {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 40px 0 28px; border-top: 1px solid var(--border);
+    }
+    .section-numeral {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.2rem; font-weight: 800; line-height: 1; letter-spacing: -2px;
+      opacity: .07; flex-shrink: 0; width: 64px; text-align: right;
+    }
+    .section-meta { flex: 1; }
+    .section-label {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.55rem; font-weight: 700; letter-spacing: -.5px; margin-bottom: 6px;
+    }
+    .section-desc { font-size: .85rem; color: var(--text-muted); max-width: 480px; }
+
+    .s-personal .section-label { color: var(--blue); }
+    .s-personal .section-numeral { color: var(--blue); }
+    .s-team .section-label { color: var(--teal); }
+    .s-team .section-numeral { color: var(--teal); }
+    .s-cross .section-label { color: var(--violet); }
+    .s-cross .section-numeral { color: var(--violet); }
+
+    /* ── BENTO GRID ── */
+    .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      box-shadow: var(--shadow); transition: var(--transition);
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+    /* Featured card */
+    .card-featured {
+      grid-column: span 2;
+      flex-direction: row; gap: 0; padding: 0; overflow: hidden;
+    }
+    .card-featured:hover { transform: translateY(-2px); }
+    .cf-left { padding: 28px 24px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+    .cf-right {
+      width: 230px; flex-shrink: 0; display: flex; flex-direction: column;
+      border-left: 1px solid var(--border);
+    }
+    .cf-signal { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .cf-tools { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .s-personal .card-featured { border-color: rgba(37,99,235,.2); }
+    .s-personal .card-featured .cf-left { background: linear-gradient(135deg,var(--blue-light) 0%,#fff 60%); }
+    .s-team .card-featured { border-color: rgba(13,148,136,.2); }
+    .s-team .card-featured .cf-left { background: linear-gradient(135deg,var(--teal-light) 0%,#fff 60%); }
+    .s-cross .card-featured { border-color: rgba(124,58,237,.2); }
+    .s-cross .card-featured .cf-left { background: linear-gradient(135deg,var(--violet-light) 0%,#fff 60%); }
+
+    .card-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; flex-shrink: 0;
+    }
+    .card-icon-lg { width: 44px; height: 44px; border-radius: 11px; font-size: 1.1rem; }
+    .ci-blue   { background: var(--blue-light); }
+    .ci-teal   { background: var(--teal-light); }
+    .ci-violet { background: var(--violet-light); }
+    .ci-orange { background: var(--orange-light); }
+    .ci-green  { background: var(--green-light); }
+    .ci-rose   { background: #fff1f2; }
+    .ci-amber  { background: #fffbeb; }
+
+    .card-top { display:flex; flex-wrap:wrap; align-items:flex-start; gap:8px 11px; }
+    .card-top > div { display:contents; }
+    .card-title { font-family:'Space Grotesk',sans-serif; font-size:.92rem; font-weight:600; line-height:1.3; flex:1; min-width:0; order:1; }
+    .card-title-lg { font-size:1.15rem; }
+    .card-desc { font-size:.84rem; color:var(--text-muted); line-height:1.65; flex-basis:100%; order:2; }
+
+    .card-bullets { list-style:none; display:flex; flex-direction:column; gap:4px; }
+    .card-bullets li {
+      font-size:.78rem; color:var(--text-muted); padding-left:13px; position:relative; line-height:1.5;
+    }
+    .card-bullets li::before { content:'→'; position:absolute; left:0; color:var(--text-dim); font-size:.72rem; top:2px; }
+
+    .signal { display:flex; flex-direction:column; gap:3px; padding-top:2px; }
+    .signal-label { font-size:.63rem; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:.8px; }
+    .signal-text { font-size:.83rem; color:var(--text-muted); line-height:1.55; }
+
+    .card-tools { display:flex; flex-wrap:wrap; gap:5px; }
+    .badge {
+      display:inline-flex; align-items:center; gap:4px;
+      font-size:.69rem; font-weight:500; padding:3px 8px 3px 5px;
+      border-radius:100px; background:var(--bg); border:1px solid var(--border); color:var(--text-muted);
+    }
+    .badge img { width:12px; height:12px; border-radius:2px; object-fit:contain; }
+
+    /* ── FRONTIER ── */
+    .frontier-wrap { background:var(--surface); border-top:1px solid var(--border); padding:60px clamp(20px,7vw,100px); }
+    .frontier-inner { max-width:1280px; margin:0 auto; }
+    .frontier-tag {
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--orange-light); border:1px solid rgba(234,88,12,.2);
+      padding:4px 12px; border-radius:100px;
+      font-size:.69rem; font-weight:700; color:var(--orange); letter-spacing:.5px; text-transform:uppercase; margin-bottom:10px;
+    }
+    .frontier-header { margin-bottom:28px; }
+    .frontier-header h2 { font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:700; letter-spacing:-.4px; }
+    .frontier-header p  { font-size:.85rem; color:var(--text-muted); margin-top:4px; }
+    .frontier-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+    .frontier-card { border:1.5px dashed var(--border); border-radius:var(--radius); padding:18px; background:var(--bg); transition:var(--transition); }
+    .frontier-card:hover { border-color:var(--orange); background:var(--orange-light); }
+    .frontier-card h4 { font-size:.85rem; font-weight:600; margin-bottom:5px; }
+    .frontier-card p  { font-size:.78rem; color:var(--text-muted); line-height:1.5; }
+
+    /* ── FOOTER ── */
+    footer { border-top:1px solid var(--border); padding:24px clamp(20px,5vw,80px); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+    footer p { font-size:.8rem; color:var(--text-muted); }
+    footer p a { color:var(--blue); text-decoration:none; font-weight:500; }
+    .footer-links { display:flex; gap:16px; }
+    .footer-links a { font-size:.8rem; color:var(--text-muted); text-decoration:none; transition:var(--transition); }
+    .footer-links a:hover { color:var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .hero { grid-template-columns:1fr; gap:32px; }
+      .bento { grid-template-columns:1fr; }
+      .card-featured { flex-direction:column; }
+      .cf-right { width:100%; border-left:none; border-top:1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Sree<span>kanth</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/how-i-use-ai.html" class="active">How I Use AI</a></li>
+    <li><a href="https://topmate.io/rsree" target="_blank" rel="noopener" class="nav-cta">Book a call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1280px;margin:0 auto;">
+  <section class="hero">
+    <div>
+      <div class="hero-tag"><span class="live-dot"></span> Living document — updated as I learn</div>
+      <h1>How I use <em>AI</em><br/>every day</h1>
+      <p class="hero-sub">I only keep workflows that <strong>change something measurable</strong> — a decision faster, a question not asked, a document actually used. If I can't point to the signal, I haven't built a system.</p>
+      <div class="hero-scroll-hint">
+        <div class="scroll-line"></div>
+        3 sections · 23 use cases · updated July 2026
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);margin-bottom:10px;">Tools in my stack</div>
+      <div class="tools-mosaic">
+        <div class="tool-tile driver"><img src="https://www.google.com/s2/favicons?sz=64&domain=anthropic.com" onerror="this.style.display='none'"><span class="tool-tile-name">Claude Code</span></div>
+        <div class="tool-tile driver"><img src="https://www.google.com/s2/favicons?sz=64&domain=cursor.sh" onerror="this.style.display='none'"><span class="tool-tile-name">Cursor</span></div>
+        <div class="tool-tile driver"><img src="https://www.google.com/s2/favicons?sz=64&domain=anthropic.com" onerror="this.style.display='none'"><span class="tool-tile-name">Claude.ai</span></div>
+        <div class="tool-tile driver"><img src="https://www.google.com/s2/favicons?sz=64&domain=granola.ai" onerror="this.style.display='none'"><span class="tool-tile-name">Granola</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=perplexity.ai" onerror="this.style.display='none'"><span class="tool-tile-name">Perplexity</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=microsoft.com" onerror="this.style.display='none'"><span class="tool-tile-name">Copilot</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=figma.com" onerror="this.style.display='none'"><span class="tool-tile-name">Figma</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=n8n.io" onerror="this.style.display='none'"><span class="tool-tile-name">n8n</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=lovable.dev" onerror="this.style.display='none'"><span class="tool-tile-name">Lovable</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=notebooklm.google.com" onerror="this.style.display='none'"><span class="tool-tile-name">NotebookLM</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=ollama.com" onerror="this.style.display='none'"><span class="tool-tile-name">Ollama</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=make.com" onerror="this.style.display='none'"><span class="tool-tile-name">Make</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=stitch.withgoogle.com" onerror="this.style.display='none'"><span class="tool-tile-name">Stitch</span></div>
+        <div class="tool-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4iCxwogkftTeWlJiuzicxHKoy34u-mFzuCtUUVPf7yFzpObMYCQAHtUS&s=10" onerror="this.style.display='none'"><span class="tool-tile-name">OpenClaw</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=grok.com" onerror="this.style.display='none'"><span class="tool-tile-name">Grok</span></div>
+        <div class="tool-tile"><img src="https://www.google.com/s2/favicons?sz=64&domain=supabase.com" onerror="this.style.display='none'"><span class="tool-tile-name">Supabase</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── SECTION 1: PERSONAL ── -->
+<div class="section-wrapper s-personal">
+  <div class="section-head">
+    <div class="section-numeral">01</div>
+    <div class="section-meta">
+      <div class="section-label">Personal Workflows</div>
+      <h2 class="section-title">How I work faster</h2>
+      <p class="section-desc">Habits that changed how I think, not just how fast I type.</p>
+    </div>
+  </div>
+  <div class="bento">
+
+    <div class="card card-featured">
+      <div class="cf-left">
+        <div class="card-top">
+          <div class="card-icon card-icon-lg ci-orange">📞</div>
+          <div>
+            <div class="card-title card-title-lg">Automating post-call follow-ups from a transcript</div>
+            <div class="card-desc" style="margin-top:4px;">After every customer call, I run a single Claude Code agent on the Granola transcript. I've set it up to produce all my post-call tasks in parallel so nothing gets forgotten, even on a busy day.</div>
+          </div>
+        </div>
+        <ul class="card-bullets">
+          <li>Customer asks and bugs from the call → JIRA tickets filed with context from the transcript</li>
+          <li>Status and next steps → my Excel tracker updated with this customer's row</li>
+          <li>Customer-facing slides → specific sections updated based on what was discussed</li>
+          <li>Good quotes from the customer → appended to my running quotes library</li>
+          <li>FAQs that came up → added to the FAQ doc I share with field teams</li>
+          <li>Follow-up email → drafted with a summary and agreed actions for both sides</li>
+        </ul>
+      </div>
+      <div class="cf-right">
+        <div class="cf-signal">
+          <div class="signal-label">Outcome</div>
+          <div class="signal-text">Post-call admin: 45 min → under 5. Any missing artifact = agent config has a gap.</div>
+        </div>
+        <div class="cf-tools">
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=atlassian.com" onerror="this.style.display='none'">Jira MCP</span>
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=atlassian.com" onerror="this.style.display='none'">Confluence MCP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-blue">✍️</div>
+        <div>
+          <div class="card-title">Getting a first draft for any document</div>
+          <div class="card-desc">For anything that involves writing — PRDs, stakeholder emails, exec decks, interview prep — I describe what I need and get a first draft in under a minute. I then spend my time making it better rather than staring at an empty doc.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Hours to first draft → minutes. Did I actually use the output or discard it?</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude.ai</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=microsoft.com" onerror="this.style.display='none'">Copilot</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-violet">🎙️</div>
+        <div>
+          <div class="card-title">Turning voice recordings into structured documents</div>
+          <div class="card-desc">I think better out loud than in writing, so I've built my workflow around voice. I hit record in Granola and just talk — about a product problem, a customer situation, whatever's on my mind. The transcript goes into Claude or Cursor and comes out as a structured document.</div>
+        </div>
+      </div>
+      <ul class="card-bullets">
+        <li>I speak my product knowledge stream-of-consciousness → Cursor + Wiki MCP turns it into a PRD and publishes it to Confluence</li>
+        <li>I record a product demo → Claude turns the transcript + screenshots into customer-facing docs</li>
+        <li>I record a good customer call → it becomes a reusable demo script for the SC and field team</li>
+      </ul>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=cursor.sh" onerror="this.style.display='none'">Cursor</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=granola.ai" onerror="this.style.display='none'">Granola</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=atlassian.com" onerror="this.style.display='none'">Wiki MCP</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-teal">🗂️</div>
+        <div>
+          <div class="card-title">Per-project context files for instant session loading</div>
+          <div class="card-desc">I create one context file per product I work on. It stores everything relevant — requirements, past decisions, JIRA status, Confluence links, key stakeholders. At the start of any Claude session I load this file and immediately have full context without rebuilding it from memory.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Time to get productive on any product at any moment. Re-orienting = broken system.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-amber">🔍</div>
+        <div>
+          <div class="card-title">Competitive research and market analysis on demand</div>
+          <div class="card-desc">When I need competitive context or market data, I ask Perplexity rather than opening five browser tabs. For deeper synthesis — like loading an analyst report or a batch of customer call transcripts — I use NotebookLM so I can ask specific questions across all of it at once.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">No longer blocking decisions on "let me get back to you."</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=perplexity.ai" onerror="this.style.display='none'">Perplexity</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=notebooklm.google.com" onerror="this.style.display='none'">NotebookLM</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-rose">🥊</div>
+        <div>
+          <div class="card-title">Preparing for high-stakes conversations</div>
+          <div class="card-desc">Before any high-stakes conversation — exec alignment, a difficult customer call, a job interview — I describe the context to Claude and ask it to argue against my position as hard as it can. The goal is to find the holes in my thinking before someone else does.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Zero surprises in the room. Every unexpected objection is a gap to close next time.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude.ai</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-blue">⚙️</div>
+        <div>
+          <div class="card-title">Building complete apps without an engineering team</div>
+          <div class="card-desc">I use Claude Code to build complete web apps by myself. I act as the PM and designer — I describe what I want, review what gets built, and redirect. Side projects I used to shelve because I couldn't build them fast enough now actually ship.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">The bottleneck is now whether the idea is worth building, not whether I can build it.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=lovable.dev" onerror="this.style.display='none'">Lovable</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=replit.com" onerror="this.style.display='none'">Replit</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-violet">🎨</div>
+        <div>
+          <div class="card-title">Prototyping on top of existing Figma screens</div>
+          <div class="card-desc">When I want to prototype something that builds on an existing product, I use Figma MCP to pull the real screen designs into Claude Code. That way I'm iterating on top of the actual design system rather than building something that looks completely different from the product.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Time from idea → shareable prototype. More than a few hours = something to fix.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=figma.com" onerror="this.style.display='none'">Figma MCP</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=cursor.sh" onerror="this.style.display='none'">Cursor</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-teal">🖼️</div>
+        <div>
+          <div class="card-title">Generating UI designs from a text description</div>
+          <div class="card-desc">When I have a rough idea for a new screen or flow, I describe it in Google Stitch and get a full UI design back in seconds. I use it to explore 2–3 directions before deciding which one to prototype or take to engineering — much faster than doing wireframes by hand.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did seeing the generated screens change the design direction? If not, the prompt wasn't specific enough.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=stitch.withgoogle.com" onerror="this.style.display='none'">Google Stitch</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=figma.com" onerror="this.style.display='none'">Figma MCP</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-green">🤖</div>
+        <div>
+          <div class="card-title">Self-hosted AI assistant running on a local model</div>
+          <div class="card-desc">I set up OpenClaw on a VM and connected it to Ollama, which runs open-source LLMs locally. The result is a personal assistant I can message on Telegram from anywhere — and since everything runs on my own machine, no data leaves my environment. Useful for anything I don't want going to a cloud API.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did the bot answer something I'd have had to look up manually? Zero cloud API = zero data exposure.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=ollama.com" onerror="this.style.display='none'">Ollama</span>
+        <span class="badge"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4iCxwogkftTeWlJiuzicxHKoy34u-mFzuCtUUVPf7yFzpObMYCQAHtUS&s=10" onerror="this.style.display='none'">OpenClaw</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-rose">🎤</div>
+        <div>
+          <div class="card-title">Practising presentations using voice AI</div>
+          <div class="card-desc">Before a big presentation I open Grok voice and speak through my talk as if I'm in the room. Grok asks me questions, pushes back on vague points, and tells me where I lost the thread. It's closer to real rehearsal than reading slides to myself.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did the real presentation go better than it would have without rehearsal? Fewer filler words and better structure are the markers.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=grok.com" onerror="this.style.display='none'">Grok</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-blue">📊</div>
+        <div>
+          <div class="card-title">Screening my stock watchlist against fundamental criteria automatically</div>
+          <div class="card-desc">My watchlist lives in Google Sheets. A Make.com scenario iterates through each ticker, sends it to Perplexity AI with my fundamental analysis criteria — things like P/E ratio thresholds, revenue growth, debt levels — and writes a pass or fail against each criterion back into the sheet. I run it before deciding whether to research a stock further or ignore it.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Initial stock screening that used to take an afternoon now runs in minutes. I only spend time on stocks that clear all the criteria.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=make.com" onerror="this.style.display='none'">Make.com</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=perplexity.ai" onerror="this.style.display='none'">Perplexity</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=google.com" onerror="this.style.display='none'">Google Sheets</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-teal">🧠</div>
+        <div>
+          <div class="card-title">Building a RAG chatbot that answers questions from my own documents</div>
+          <div class="card-desc">I built a pipeline in n8n that takes documents, chunks them, generates vector embeddings, and stores them in Supabase. A chatbot sits on top — when someone asks a question, it retrieves the most relevant chunks via vector similarity search and passes them to an LLM to answer from that context. No backend code written by hand.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Answers are grounded in the actual documents so hallucinations drop significantly. Anyone can query a knowledge base I've set up without having to read through the source material.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=n8n.io" onerror="this.style.display='none'">n8n</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=supabase.com" onerror="this.style.display='none'">Supabase</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SECTION 2: TEAM ── -->
+<div class="section-wrapper s-team">
+  <div class="section-head">
+    <div class="section-numeral">02</div>
+    <div class="section-meta">
+      <div class="section-label">Team Leverage</div>
+      <h2 class="section-title">How I multiply the team</h2>
+      <p class="section-desc">Personal AI productivity compounds slowly. Team AI productivity compounds fast.</p>
+    </div>
+  </div>
+  <div class="bento">
+
+    <div class="card card-featured">
+      <div class="cf-left">
+        <div class="card-top">
+          <div class="card-icon card-icon-lg ci-teal">🛠️</div>
+          <div>
+            <div class="card-title card-title-lg">Building reusable AI skills the whole team can invoke</div>
+            <div class="card-desc" style="margin-top:4px;">Every time I build a prompt or workflow that solves something well, I turn it into a named skill anyone on the team can invoke by typing its name. I've packaged 16 of these into a PM Skills Pack and open-sourced it on GitHub so other PMs can use them too.</div>
+          </div>
+        </div>
+        <ul class="card-bullets">
+          <li>Skills cover the full PM loop: discovery interviews, PRD drafting, competitive briefs, engineering handoff docs</li>
+          <li>One skill — Project Context — builds a structured context file for any product so the rest of the skills have something to work from</li>
+          <li>I built a usage dashboard that auto-logs every invocation: what skill was run, time saved, and quality rating</li>
+          <li>Available at github.com/Adobe-AIFoundations/PM-skills</li>
+        </ul>
+      </div>
+      <div class="cf-right">
+        <div class="cf-signal">
+          <div class="signal-label">Outcome</div>
+          <div class="signal-text">How often did a teammate invoke something I built? Zero reuse = still personal productivity.</div>
+        </div>
+        <div class="cf-tools">
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=cursor.sh" onerror="this.style.display='none'">Cursor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-green">📋</div>
+        <div>
+          <div class="card-title">Capturing decisions and action items from every meeting</div>
+          <div class="card-desc">I run Granola for every meeting. It captures audio in the background and produces a structured note with decisions, open questions, and action items — not a word-for-word transcript. By the time the call ends, the note is ready to forward or feed into the next session.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did we re-discuss something from a previous meeting? That's a failure state.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=granola.ai" onerror="this.style.display='none'">Granola</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-blue">📡</div>
+        <div>
+          <div class="card-title">Scheduled weekly briefing across all active products</div>
+          <div class="card-desc">I have a scheduled Claude Code agent that runs every Monday morning. It scans my email, Jira, Slack, and SharePoint across all my active products and sends me a structured briefing — RAG status, open decisions, what each team needs from me this week. It arrives before I open my laptop.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did the briefing surface something I'd have missed? If never — sources or prompts need rework.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=n8n.io" onerror="this.style.display='none'">n8n</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-violet">🏆</div>
+        <div>
+          <div class="card-title">Drafting positioning docs and sales collateral</div>
+          <div class="card-desc">When the sales or field team needs a positioning doc, competitive comparison, or battle card, I describe the product situation and the audience to Claude and get a solid first draft immediately. The team gets consistent messaging faster and I'm not a bottleneck between deals and content.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Are field teams using the collateral in conversations, or asking for changes?</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude.ai</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=microsoft.com" onerror="this.style.display='none'">Copilot</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-amber">📊</div>
+        <div>
+          <div class="card-title">Tracking which AI workflows are actually working</div>
+          <div class="card-desc">I built an HTML dashboard that auto-updates every time I or a teammate runs one of my skills. It logs which skill was used, how long it would have taken manually, and what I'd change. Without this, I'd have no way to know if any of it was actually working.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">A rarely-used or weak-output skill gets revised or retired. Usage data drives the loop.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SECTION 3: CROSS-TEAM ── -->
+<div class="section-wrapper s-cross">
+  <div class="section-head">
+    <div class="section-numeral">03</div>
+    <div class="section-meta">
+      <div class="section-label">Cross-Team Self-Serve</div>
+      <h2 class="section-title">How I stop being the bottleneck</h2>
+      <p class="section-desc">As PM, I get constant questions from legal, design, sales, and engineering. The fix: encode what I know into systems they query themselves.</p>
+    </div>
+  </div>
+  <div class="bento">
+
+    <div class="card card-featured">
+      <div class="cf-left">
+        <div class="card-top">
+          <div class="card-icon card-icon-lg ci-violet">🏛️</div>
+          <div>
+            <div class="card-title card-title-lg">Shared product knowledge base for cross-functional teams</div>
+            <div class="card-desc" style="margin-top:4px;">As a PM I field a constant stream of questions from legal, design, sales, and engineering. Instead of being the answer for every one of them, I create a Claude Project for each product I own and load it with everything: requirements, decisions, customer context, open questions. I share the link and people self-serve.</div>
+          </div>
+        </div>
+        <ul class="card-bullets">
+          <li>I also build a custom Copilot agent pointed at product assets — field and support teams ask it product questions directly without coming to me</li>
+          <li>I use a Project Context skill to keep the Claude Project current after meetings and planning sessions</li>
+          <li>The goal: a teammate gets a better answer from the hub than from pinging me, and faster</li>
+        </ul>
+      </div>
+      <div class="cf-right">
+        <div class="cf-signal">
+          <div class="signal-label">Outcome</div>
+          <div class="signal-text">Fewer ad-hoc questions = hub is working. More questions = something's missing. I track inbound volume.</div>
+        </div>
+        <div class="cf-tools">
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Projects</span>
+          <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=microsoft.com" onerror="this.style.display='none'">Copilot Agents</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-teal">📰</div>
+        <div>
+          <div class="card-title">Automated customer meeting summary sent to leaders weekly</div>
+          <div class="card-desc">I have a Copilot prompt scheduled to run every Sunday night. It reads the transcripts from all customer meetings that week and writes a structured update — which customers I met, what they said, what's at risk, and what I'm doing about it. Leaders get it in their inbox by 8am Monday without me writing a single word.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did a leader ask "what happened last week?" If yes, the update wasn't useful enough.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=microsoft.com" onerror="this.style.display='none'">Copilot</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=n8n.io" onerror="this.style.display='none'">n8n</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-blue">⚡</div>
+        <div>
+          <div class="card-title">Building a working prototype before writing requirements</div>
+          <div class="card-desc">Instead of writing a lengthy spec for every new idea, I build a rough working prototype with Claude Code or Lovable first. I put it in front of a customer or stakeholder, learn from their reaction, and then write the real requirements based on what I observed. All prototypes live in a central hub so stakeholders can find them without asking.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did the prototype change a design decision before production code was written? Every change here is a sprint saved.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=lovable.dev" onerror="this.style.display='none'">Lovable</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-orange">🧪</div>
+        <div>
+          <div class="card-title">Automated demo environment setup using an MCP server</div>
+          <div class="card-desc">Before a product demo I need a clean Marketo environment with realistic campaigns and forms — not my production data. I set up an MCP server for Marketo so I can tell Claude exactly what test setup I need and it creates everything programmatically. Demo prep that used to take 30 minutes now takes under 2.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">Did the demo env require any manual fix before the call? Zero manual setup is the goal.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=marketo.com" onerror="this.style.display='none'">Marketo MCP</span>
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon ci-rose">🤝</div>
+        <div>
+          <div class="card-title">Replacing recurring status meetings with scheduled AI briefings</div>
+          <div class="card-desc">For teams or partners who need regular status updates, I set up a scheduled AI briefing instead of a recurring meeting. It pulls from the same sources as my Monday briefing and sends a summary on a cadence. Most of the time, the meeting never gets booked because the briefing answered what it would have covered.</div>
+        </div>
+      </div>
+      <div class="signal">
+        <span class="signal-label">Outcome</span>
+        <span class="signal-text">A recurring sync that never got scheduled is the best outcome. I track how many were cancelled directly because of this.</span>
+      </div>
+      <div class="card-tools">
+        <span class="badge"><img src="https://www.google.com/s2/favicons?sz=32&domain=anthropic.com" onerror="this.style.display='none'">Claude Code</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FRONTIER -->
+<div class="frontier-wrap">
+  <div class="frontier-inner">
+    <div class="frontier-header">
+      <div class="frontier-tag">🔭 Still figuring out</div>
+      <h2>The frontier</h2>
+      <p>Use cases I've identified but haven't fully solved. If you've cracked any of these, I'd love to talk.</p>
+    </div>
+    <div class="frontier-grid">
+      <div class="frontier-card"><h4>Proactive push agents</h4><p>Competitor moves and churn signals landing in my inbox before I think to look. Currently I pull. I want it to push.</p></div>
+      <div class="frontier-card"><h4>Customer intelligence river</h4><p>Weekly synthesis → "3 things customers are saying this week that weren't true 4 weeks ago."</p></div>
+      <div class="frontier-card"><h4>One output → five surfaces</h4><p>A LinkedIn post that automatically becomes a Slack message, exec talking point, and newsletter item. Publish once, distribute intelligently.</p></div>
+      <div class="frontier-card"><h4>Voice → everything, everywhere</h4><p>Every meeting auto-transcribed, decisions surfaced, actions distributed — zero manual work at any point in the flow.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Built by <a href="/">Sreekanth Reddy</a> · Updated as I learn · <a href="mailto:rsrikanth080@gmail.com">Suggest a use case</a></p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="https://linkedin.com/in/rsree-kanth" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://topmate.io/rsree" target="_blank" rel="noopener">Book a call</a>
+  </div>
+</footer>
+
+</body>
+</html>
