@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://sree-kanth.netlify.app/two-cents.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="./insights-data.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,36 +41,45 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      padding-top: 68px;
     }
 
     /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(247,244,239,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--card-border);
-      padding: 0 clamp(20px,5vw,60px);
-      height: 60px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px,5vw,80px); height: 68px;
+      background: rgba(4,11,26,0.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.055);
     }
-    .nav-back {
-      display: flex; align-items: center; gap: 6px;
-      color: var(--text-muted); text-decoration: none;
-      font-size: 0.85rem; font-weight: 500;
-      transition: color .2s;
+    .nav-logo {
+      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem;
+      background: linear-gradient(135deg,#fff 0%,#6366f1 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      letter-spacing:-.3px; text-decoration:none;
     }
-    .nav-back:hover { color: var(--text); }
-    .nav-brand {
-      font-family: 'Lora', serif;
-      font-weight: 600; font-size: 1rem;
-      color: var(--accent);
-      letter-spacing: -0.01em;
+    .nav-logo span { opacity:0.75; }
+    .nav-links { display:flex; gap:8px; list-style:none; align-items:center; }
+    .nav-links a { text-decoration:none; color:rgba(255,255,255,0.6); font-size:.85rem; font-weight:500; padding:6px 14px; border-radius:8px; transition:all .2s; }
+    .nav-links a:hover { color:#fff; background:rgba(255,255,255,0.06); }
+    .nav-links a.active { color:#fff; background:rgba(255,255,255,0.1); }
+    .nav-cta { background:#6366f1!important; color:#fff!important; padding:8px 18px!important; border-radius:8px; }
+    .nav-cta:hover { background:#4f46e5!important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; }
+    .hamburger span { display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:all .2s; }
+    @media(max-width:768px) {
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
     }
-    .nav-count {
-      font-size: 0.75rem; color: var(--text-dim);
-      background: var(--surface); border: 1px solid var(--card-border);
-      padding: 4px 12px; border-radius: 999px;
+    .mobile-nav {
+      display:none; flex-direction:column; gap:4px;
+      position:fixed; top:68px; left:0; right:0; z-index:99;
+      background:rgba(4,11,26,0.97); padding:16px 24px 24px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
     }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:.9rem; font-weight:500; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .mobile-nav a:hover { color:#fff; }
 
     /* ── WRAPPER — aligns hero + main grid ── */
     .page-wrap {
@@ -470,13 +479,26 @@
 
 <!-- NAV -->
 <nav>
-  <a href="./index.html" class="nav-back">
-    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    Back to Portfolio
-  </a>
-  <span class="nav-brand">My Two Cents</span>
-  <span class="nav-count" id="nav-count">— insights</span>
+  <a href="index.html" class="nav-logo">Sree<span>kanth</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#portfolio">Work</a></li>
+    <li><a href="how-i-use-ai.html">How I Use AI</a></li>
+    <li><a href="two-cents.html" class="active">Two Cents</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Book a call</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html" onclick="document.getElementById('mobile-nav').classList.remove('open')">Home</a>
+  <a href="index.html#portfolio" onclick="document.getElementById('mobile-nav').classList.remove('open')">Work</a>
+  <a href="how-i-use-ai.html">How I Use AI</a>
+  <a href="two-cents.html">Two Cents</a>
+  <a href="index.html#contact" onclick="document.getElementById('mobile-nav').classList.remove('open')">Book a call</a>
+</div>
 
 <div class="page-wrap">
 
